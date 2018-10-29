@@ -22,6 +22,6 @@ before_deploy:
 deploy:
   skip_cleanup: true # prevents travis from deleting the build
   provider: heroku
-  app: grace-shopper # see README
+  app: mimsy-virus # see README
   api_key:
     secure: 296fe424-b514-4b7c-bb06-9698674eaa6f # see README
