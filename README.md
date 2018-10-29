@@ -112,7 +112,7 @@ CI is not about testing per se – it's about _continuously integrating_ your ch
 
 That's it! From now on, whenever `master` is updated on GitHub, Travis will automatically push the app to Heroku for you.
 
-#### Option B: Manual Deployment from your Local Machine
+#### Option B: Manual Deployment from your Local Machine ###HI
 
 Some developers may prefer to control deployment rather than rely on automation. Your local copy of the application can be pushed up to Heroku at will, using Boilermaker's handy deployment script:
 
