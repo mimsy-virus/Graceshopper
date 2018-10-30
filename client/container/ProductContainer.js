@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import ProductItem from '../components/ProductItem'
 import ProductsList from '../components/ProductsList'
 import FilterMenu from '../components/FilterMenu'
+import Search from '../components/Search'
 
 const products1 = [
   {
@@ -55,6 +56,7 @@ class ProductsContainer extends Component {
     return (
       <ProductsList title="Products">
         <FilterMenu handleChange={this.handleChange} {...this.state} />
+        <Search />
         {products.map(product => (
           <ProductItem key={product.id} product={product} onAddToCartClicked />
         ))}
