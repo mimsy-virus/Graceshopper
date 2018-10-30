@@ -3,34 +3,37 @@ import { connect } from 'react-redux'
 import { addNewProduct } from '../store/product'
 import Form from './adminForm'
 
-const mapDispatchToProps = dispatch => {
-  return {
-    addNewProduct: product => {
-      dispatch(addNewProduct(product))
-    }
-  }
-}
-
-class NewProduct extends Component {
+class NewProductForm extends Component {
   constructor(props) {
     super(props)
-    this.state = {}
+    this.state = {
+      newProduct: {
+        name: '',
+        description: '',
+        imgUrl: '',
+        price: '',
+        quantity: '',
+        category: ''
+      }
+    }
   }
 
-  handleChange(event) {
+  handleChange() {
     const name = document.getElementById('new product name input')
     const description = document.getElementById('new product description input')
     const imgUrl = document.getElementById('new product imgUrl input')
-    const price = document.getElementById('new product address input')
-    const quantity = document.getElementById('new product address input')
-    const category = document.getElementById('new product address input')
-    this.setState()
+    const price = document.getElementById('new product price input')
+    const quantity = document.getElementById('new product quantity input')
+    const category = document.getElementById('new product category input')
+    this.setState({
+      newProduct: [name, description, imgUrl, price, quantity, category]
+    })
   }
 
   handleSubmit(event) {
     event.preventDefault()
-    // const newproduct = this.props.addNewproduct
-    // this.props.postNewproduct(newproduct)
+    const newProduct = this.state.newProduct
+    this.props.addNewproduct(newProduct)
     this.routeChange()
   }
 
@@ -48,7 +51,7 @@ class NewProduct extends Component {
         <Form
           handleChange={this.handleChange.bind(this)}
           handleSubmit={this.handleSubmit.bind(this)}
-          data={this.props.addNewproduct}
+          data={this.state.newProduct}
           field="new product"
         />
       </div>
@@ -56,4 +59,12 @@ class NewProduct extends Component {
   }
 }
 
-export default connect(null, mapDispatchToProps)(NewProduct)
+const mapDispatchToProps = dispatch => {
+  return {
+    addNewProduct: product => {
+      dispatch(addNewProduct(product))
+    }
+  }
+}
+
+export default connect(null, mapDispatchToProps)(NewProductForm)
