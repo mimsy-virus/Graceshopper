@@ -5,29 +5,7 @@ import ProductItem from '../components/ProductItem'
 import ProductsList from '../components/ProductsList'
 import FilterMenu from '../components/FilterMenu'
 import Search from '../components/Search'
-
-const products1 = [
-  {
-    id: 1,
-    name: 'hreyt',
-    description: 'ehryetgebte',
-    imgUrl:
-      'https://designerdoginfo.files.wordpress.com/2013/01/puggle-puppy-4.jpg?w=584',
-    price: 188,
-    qty: 5,
-    categories: 'shot'
-  },
-  {
-    id: 2,
-    name: 'hreryryyt',
-    description: 'euyutibte',
-    imgUrl:
-      'https://designerdoginfo.files.wordpress.com/2013/01/puggle-puppy-4.jpg?w=584',
-    price: 233,
-    qty: 5,
-    categories: 'pill'
-  }
-]
+import { getCurrentProduct } from '../store'
 
 class ProductsContainer extends Component {
   constructor(props) {
@@ -35,6 +13,10 @@ class ProductsContainer extends Component {
     this.state = {
       selectedCategory: ''
     }
+  }
+  componentDidMount() {
+    this.props.fetchProducts()
+    //console.log(this.props)
   }
 
   handleChange = evt => {
@@ -44,49 +26,44 @@ class ProductsContainer extends Component {
   }
 
   render() {
-    const { selectedCategory } = this.state
-    const products = selectedCategory
-      ? this.props.products.filter(product => {
-          console.log(product.categories)
-          console.log(selectedCategory)
-          return product.categories === selectedCategory
-        })
-      : this.props.products
-    console.log(products)
+    console.log(this.props)
     return (
-      <ProductsList title="Products">
-        <FilterMenu handleChange={this.handleChange} {...this.state} />
-        <Search />
-        {products.map(product => (
-          <ProductItem key={product.id} product={product} onAddToCartClicked />
-        ))}
-      </ProductsList>
+      !!this.props.productList.length && (
+        <ProductsList title="Products">
+          <FilterMenu handleChange={this.handleChange} {...this.state} />
+          <Search />
+          {this.props.productList.map(product => (
+            <ProductItem
+              key={product.id}
+              product={product}
+              onAddToCartClicked
+            />
+          ))}
+        </ProductsList>
+      )
     )
   }
 }
 
-// const ProductsContainer = ({ products }) => (
-//   <ProductsList title="Products">
-//     {products.map(product => (
-//       <ProductItem key={product.id} product={product} onAddToCartClicked />
-//     ))}
-//   </ProductsList>
-// )
-//Rui Need to revisit this part when database works
 // ProductsContainer.propTypes = {
 //   products: PropTypes.arrayOf(
 //     PropTypes.shape({
 //       id: PropTypes.number.isRequired,
 //       name: PropTypes.string.isRequired,
+//       description: PropTypes.string.isRequired,
+//       imgUrl: PropTypes.string.isRequired,
 //       price: PropTypes.number.isRequired,
-//       Quantity: PropTypes.number.isRequired
+//       quantity: PropTypes.number.isRequired,
+//       category: PropTypes.string.isRequired
 //     })
-//   ).isRequired,
-//   addToCart: PropTypes.func.isRequired
+//   ).isRequired
 // }
 
 const mapStateToProps = state => ({
-  products: products1
+  productList: state.productList
+})
+const mapDispatchToProps = dispatch => ({
+  fetchProducts: () => dispatch(getCurrentProduct())
 })
 
-export default connect(mapStateToProps)(ProductsContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(ProductsContainer)
