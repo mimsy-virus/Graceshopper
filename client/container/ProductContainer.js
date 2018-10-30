@@ -28,11 +28,11 @@ class ProductsContainer extends Component {
   render() {
     console.log(this.props)
     return (
-      !!this.props.productList.length && (
+      !!this.props.productList.productList.length && (
         <ProductsList title="Products">
           <FilterMenu handleChange={this.handleChange} {...this.state} />
           <Search />
-          {this.props.productList.map(product => (
+          {this.props.productList.productList.map(product => (
             <ProductItem
               key={product.id}
               product={product}
