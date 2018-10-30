@@ -75,7 +75,7 @@ const User = db.define('user', {
     }
   },
 
-  userrole: {
+  userRole: {
     type: Sequelize.STRING,
     allowNull: false,
     validate: {
