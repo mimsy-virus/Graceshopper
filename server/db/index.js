@@ -12,7 +12,4 @@ Review.belongsTo(User)
 Product.hasMany(Review)
 Review.belongsTo(Product)
 
-Order.hasMany(Product)
-Product.belongsToMany(Order)
-
 module.exports = db

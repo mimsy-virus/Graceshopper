@@ -1,10 +1,9 @@
-const crypto = require('crypto')
 const Sequelize = require('sequelize')
 const db = require('../db')
 
 const Order = db.define('order', {
-  products: {
-    type: Sequelize.ARRAY,
+  productOrder: {
+    type: Sequelize.ARRAY(Sequelize.JSON),
     allowNull: false,
     validate: {
       notEmpty: true
