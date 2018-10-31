@@ -6,6 +6,7 @@ import ProductsList from '../components/ProductsList'
 import FilterMenu from '../components/FilterMenu'
 import Search from '../components/Search'
 import { getCurrentProduct } from '../store'
+import singleProduct from '../components/singleProduct'
 
 class ProductsContainer extends Component {
   constructor(props) {
@@ -61,6 +62,7 @@ class ProductsContainer extends Component {
 
 const mapStateToProps = state => ({
   productList: state.productList
+  // isAdmin : state.user.adimin
 })
 const mapDispatchToProps = dispatch => ({
   fetchProducts: () => dispatch(getCurrentProduct())

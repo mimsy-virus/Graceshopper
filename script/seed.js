@@ -25,7 +25,6 @@ async function seed() {
 
   const productsData = [
     {
-      id: 1,
       name: 'Glycerine',
       description: 'S92002S',
       imageUrl: 'http://dummyimage.com/165x125.bmp/ff4444/ffffff',
@@ -34,7 +33,6 @@ async function seed() {
       category: 'pill'
     },
     {
-      id: 2,
       name: 'Lithium Carbonate',
       description: 'M1A08',
       imageUrl: 'http://dummyimage.com/177x130.jpg/ff4444/ffffff',
@@ -43,7 +41,6 @@ async function seed() {
       category: 'pill'
     },
     {
-      id: 3,
       name: 'Silver Sulfadiazine',
       description: 'M8552',
       imageUrl: 'http://dummyimage.com/154x211.bmp/5fa2dd/ffffff',
@@ -52,7 +49,6 @@ async function seed() {
       category: 'pill'
     },
     {
-      id: 4,
       name: 'Amlodipine Besylate',
       description: 'Y380X2S',
       imageUrl: 'http://dummyimage.com/195x228.png/dddddd/000000',
@@ -61,7 +57,6 @@ async function seed() {
       category: 'pill'
     },
     {
-      id: 5,
       name: 'AMBROSIA ARTEMISIAEFOLIA',
       description: 'W5559XA',
       imageUrl: 'http://dummyimage.com/156x221.bmp/5fa2dd/ffffff',
@@ -70,7 +65,6 @@ async function seed() {
       category: 'pill'
     },
     {
-      id: 6,
       name: 'ESZOPICLONE',
       description: 'T531X2S',
       imageUrl: 'http://dummyimage.com/115x187.png/cc0000/ffffff',
@@ -79,7 +73,6 @@ async function seed() {
       category: 'pill'
     },
     {
-      id: 7,
       name: 'Avobenzone, Homosalate, Octisalate, Octocrylene, Oxybenzone',
       description: 'D36',
       imageUrl: 'http://dummyimage.com/204x153.bmp/cc0000/ffffff',
@@ -88,7 +81,6 @@ async function seed() {
       category: 'shot'
     },
     {
-      id: 8,
       name:
         'Bismuth subcitrate potassium, Metronidazole, Tetracycline hydrochloride',
       description: 'S82263R',
@@ -98,7 +90,6 @@ async function seed() {
       category: 'shot'
     },
     {
-      id: 9,
       name: 'PredniSONE',
       description: 'Y213XXS',
       imageUrl: 'http://dummyimage.com/201x141.jpg/ff4444/ffffff',
@@ -107,7 +98,6 @@ async function seed() {
       category: 'shot'
     },
     {
-      id: 10,
       name: 'Bicalutamide',
       description: 'S72136Q',
       imageUrl: 'http://dummyimage.com/112x205.bmp/dddddd/000000',
@@ -116,7 +106,6 @@ async function seed() {
       category: 'shot'
     },
     {
-      id: 11,
       name: 'Isosorbide Mononitrate',
       description: 'S90912D',
       imageUrl: 'http://dummyimage.com/187x249.png/cc0000/ffffff',
@@ -125,7 +114,6 @@ async function seed() {
       category: 'shot'
     },
     {
-      id: 12,
       name: 'Diphenhydramine HCl',
       description: 'S53101S',
       imageUrl: 'http://dummyimage.com/232x110.png/5fa2dd/ffffff',
@@ -134,7 +122,6 @@ async function seed() {
       category: 'shot'
     },
     {
-      id: 13,
       name: 'estradiol',
       description: 'I800',
       imageUrl: 'http://dummyimage.com/164x178.png/5fa2dd/ffffff',
@@ -143,7 +130,6 @@ async function seed() {
       category: 'shot'
     },
     {
-      id: 14,
       name: 'fluvoxamine maleate',
       description: 'T565X2S',
       imageUrl: 'http://dummyimage.com/202x128.png/5fa2dd/ffffff',
@@ -152,7 +138,6 @@ async function seed() {
       category: 'shot'
     },
     {
-      id: 15,
       name: 'BENZALKONIUM CHLORIDE',
       description: 'Q892',
       imageUrl: 'http://dummyimage.com/171x130.png/ff4444/ffffff',
@@ -161,7 +146,6 @@ async function seed() {
       category: 'shot'
     },
     {
-      id: 16,
       name: 'Warfarin Sodium',
       description: 'T50993',
       imageUrl: 'http://dummyimage.com/122x123.bmp/5fa2dd/ffffff',
@@ -170,7 +154,6 @@ async function seed() {
       category: 'shot'
     },
     {
-      id: 17,
       name: 'Titanium Dioxide and Zinc Oxide',
       description: 'S82143R',
       imageUrl: 'http://dummyimage.com/113x216.bmp/5fa2dd/ffffff',
@@ -179,7 +162,6 @@ async function seed() {
       category: 'shot'
     },
     {
-      id: 18,
       name: 'Hydroxyzine Hydrochloride',
       description: 'S22050D',
       imageUrl: 'http://dummyimage.com/135x217.bmp/cc0000/ffffff',
@@ -188,7 +170,6 @@ async function seed() {
       category: 'shot'
     },
     {
-      id: 19,
       name: 'Acetaminophen, Chlorpheniramine Maleate',
       description: 'S63301',
       imageUrl: 'http://dummyimage.com/137x218.jpg/cc0000/ffffff',
@@ -197,7 +178,6 @@ async function seed() {
       category: 'shot'
     },
     {
-      id: 20,
       name: 'AVOBENZONE, OCTINOXATE, ZINC OXIDE, OCTOCRYLENE',
       description: 'S32444A',
       imageUrl: 'http://dummyimage.com/181x248.jpg/5fa2dd/ffffff',
@@ -206,7 +186,6 @@ async function seed() {
       category: 'shot'
     },
     {
-      id: 21,
       name: 'PROCAINAMIDE HYDROCHLORIDE',
       description: 'T8283',
       imageUrl: 'http://dummyimage.com/175x231.png/ff4444/ffffff',
@@ -215,7 +194,6 @@ async function seed() {
       category: 'pill'
     },
     {
-      id: 22,
       name: 'Octinoxate and Oxybenzone',
       description: 'H74311',
       imageUrl: 'http://dummyimage.com/124x122.bmp/dddddd/000000',
@@ -224,7 +202,6 @@ async function seed() {
       category: 'pill'
     },
     {
-      id: 23,
       name: 'Pork',
       description: 'S22010A',
       imageUrl: 'http://dummyimage.com/182x219.jpg/dddddd/000000',
@@ -233,7 +210,6 @@ async function seed() {
       category: 'pill'
     },
     {
-      id: 24,
       name: 'Acetaminophen',
       description: 'S99822',
       imageUrl: 'http://dummyimage.com/188x203.png/5fa2dd/ffffff',
@@ -242,7 +218,6 @@ async function seed() {
       category: 'pill'
     },
     {
-      id: 25,
       name:
         'Antimonium tartaricum, Belladonna, Bryonia,Causticum, Coccus cacti, Cuprum aceticum, Drosera rotundifolia, Kreosotum, Lobelia inflata, Pulsatilla, Stannum metallicum, Sticta pulmonaria',
       description: 'S82221M',
