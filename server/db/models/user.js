@@ -11,7 +11,10 @@ const User = db.define('user', {
   },
   email: {
     type: Sequelize.STRING,
-    unique: true
+    unique: true,
+    validate: {
+      isEmail: true
+    }
   },
   password: {
     type: Sequelize.STRING,
@@ -24,15 +27,21 @@ const User = db.define('user', {
   phone: {
     type: Sequelize.STRING
   },
-  billingAddress: {
+  userAddress: {
     type: Sequelize.STRING
   },
-  shippingAddress: {
+  userCity: {
     type: Sequelize.STRING
   },
-  userRole: {
-    type: Sequelize.INTEGER,
-    defaultValue: 1
+  userState: {
+    type: Sequelize.STRING
+  },
+  userZipCode: {
+    type: Sequelize.STRING
+  },
+  isAdmin: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false
   },
   salt: {
     type: Sequelize.STRING,

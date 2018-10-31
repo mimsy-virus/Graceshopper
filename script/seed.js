@@ -3,25 +3,76 @@
 const db = require('../server/db')
 const { User } = require('../server/db/models')
 const { Product } = require('../server/db/models')
+const { Review } = require('../server/db/models')
+const { Order } = require('../server/db/models')
 
 async function seed() {
   await db.sync({ force: true })
   console.log('db synced!')
 
-  const users = await Promise.all([
-    User.create({
+  // const users = await Promise.all([
+  //   User.create({
+  //     firstName: 'Cody',
+  //     lastName: 'Dog',
+  //     email: 'cody@email.com',
+  //     password: '123'
+  //   }),
+  //   User.create({
+  //     firstName: 'Murphy',
+  //     lastName: 'Fiji',
+  //     email: 'murphy@email.com',
+  //     password: '123'
+  //   })
+  // ])
+
+  const usersData = [
+    {
+      firstName: 'James',
+      lastName: 'Stephens',
+      email: 'brrp@email.com',
+      password: '123',
+      isAdmin: true
+    },
+    {
+      firstName: 'Rui',
+      lastName: 'Yang',
+      email: 'rui@email.com',
+      password: '123',
+      isAdmin: true
+    },
+    {
+      firstName: 'Monferd',
+      lastName: 'Collin',
+      email: 'monmon@email.com',
+      password: '123',
+      isAdmin: true
+    },
+    {
+      firstName: 'Chris',
+      lastName: 'Li',
+      email: 'chrisLi@email.com',
+      password: '123',
+      isAdmin: true
+    },
+    {
       firstName: 'Cody',
       lastName: 'Dog',
       email: 'cody@email.com',
       password: '123'
-    }),
-    User.create({
+    },
+    {
+      firstName: 'Not',
+      lastName: 'Cody',
+      email: 'notcody@email.com',
+      password: '123'
+    },
+    {
       firstName: 'Murphy',
       lastName: 'Fiji',
       email: 'murphy@email.com',
       password: '123'
-    })
-  ])
+    }
+  ]
 
   const productsData = [
     {
@@ -228,9 +279,102 @@ async function seed() {
     }
   ]
 
-  const products = await Product.bulkCreate(productsData)
+  const reviewsData = [
+    {
+      reviewText: 'brrp da brrp da brrp',
+      rating: 3,
+      userId: 2,
+      productId: 7
+    },
+    {
+      reviewText: 'brrp da brrp da brrp',
+      rating: 2,
+      userId: 1,
+      productId: 18
+    },
+    {
+      reviewText: 'brrp da brrp da brrp',
+      rating: 4,
+      userId: 1,
+      productId: 23
+    },
+    {
+      reviewText: 'brrp da brrp da brrp',
+      rating: 7,
+      userId: 1,
+      productId: 13
+    },
+    {
+      reviewText: 'brrp da brrp da brrp',
+      rating: 9,
+      userId: 1,
+      productId: 3
+    },
+    {
+      reviewText: 'brrp da brrp da brrp',
+      rating: 3,
+      userId: 2,
+      productId: 3
+    }
+  ]
 
-  console.log(`seeded ${users.length} users`)
+  const ordersData = [
+    {
+      orderProducts: [
+        {
+          name: 'Glycerine',
+          description: 'S92002S',
+          imageUrl: 'http://dummyimage.com/165x125.bmp/ff4444/ffffff',
+          price: 9.99,
+          quantity: 10,
+          category: 'pill'
+        },
+        {
+          name: 'fluvoxamine maleate',
+          description: 'T565X2S',
+          imageUrl: 'http://dummyimage.com/202x128.png/5fa2dd/ffffff',
+          price: 9.99,
+          quantity: 10,
+          category: 'shot'
+        },
+        {
+          name: 'BENZALKONIUM CHLORIDE',
+          description: 'Q892',
+          imageUrl: 'http://dummyimage.com/171x130.png/ff4444/ffffff',
+          price: 9.99,
+          quantity: 10,
+          category: 'shot'
+        },
+        {
+          name: 'Warfarin Sodium',
+          description: 'T50993',
+          imageUrl: 'http://dummyimage.com/122x123.bmp/5fa2dd/ffffff',
+          price: 9.99,
+          quantity: 10,
+          category: 'shot'
+        }
+      ],
+      status: 'completed',
+      shippingAddress: '123 way lane',
+      shippingCity: 'Miami',
+      shippingState: 'FL',
+      shippingZipCode: '34110',
+      subTotal: 39.96,
+      taxRate: 0.06,
+      total: 42.36,
+      userId: 1
+    }
+  ]
+
+  await User.bulkCreate(usersData)
+  await Product.bulkCreate(productsData)
+  await Review.bulkCreate(reviewsData)
+  await Order.bulkCreate(ordersData)
+
+  console.log(`seeded ${usersData.length} users`)
+  console.log(`seeded ${productsData.length} users`)
+  console.log(`seeded ${reviewsData.length} users`)
+  console.log(`seeded ${ordersData.length} users`)
   console.log(`seeded successfully`)
 }
 
