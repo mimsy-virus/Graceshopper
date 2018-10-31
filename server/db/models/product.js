@@ -18,7 +18,6 @@ const Product = db.define('product', {
   },
   imgUrl: {
     type: Sequelize.TEXT,
-    allowNull: false,
     defaultValue:
       'https://i0.wp.com/www.skepticalraptor.com/blog/wp-content/uploads/2017/02/vaccine-vial-syringe-white.jpg?fit=768%2C576&ssl=1',
     validate: {
@@ -28,6 +27,7 @@ const Product = db.define('product', {
   price: {
     type: Sequelize.FLOAT,
     allowNull: false,
+    defaultValue: 0,
     validate: {
       notEmpty: true,
       min: 0
@@ -36,6 +36,7 @@ const Product = db.define('product', {
   quantity: {
     type: Sequelize.INTEGER,
     allowNull: false,
+    defaultValue: 0,
     validate: {
       notEmpty: true,
       min: 0
