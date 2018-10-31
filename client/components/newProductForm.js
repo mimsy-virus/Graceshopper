@@ -1,58 +1,63 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { addNewProduct } from '../store/product'
-import Form from './adminForm'
+import AdminForm from './AdminForm'
 
 class NewProductForm extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      newProduct: {
-        name: '',
-        description: '',
-        imgUrl: '',
-        price: '',
-        quantity: '',
-        category: ''
-      }
+      name: '',
+      description: '',
+      imgUrl: '',
+      price: 0,
+      quantity: 0,
+      category: ''
     }
+
+    this.handleChange = this.handleChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  handleChange() {
-    const name = document.getElementById('new product name input')
-    const description = document.getElementById('new product description input')
-    const imgUrl = document.getElementById('new product imgUrl input')
-    const price = document.getElementById('new product price input')
-    const quantity = document.getElementById('new product quantity input')
-    const category = document.getElementById('new product category input')
+  handleChange(event) {
     this.setState({
-      newProduct: [name, description, imgUrl, price, quantity, category]
+      [event.target.name]: event.target.value
     })
+    // const name = document.getElementById('nameInput')
+    // const description = document.getElementById('descriptionInput')
+    // const imgUrl = document.getElementById('imgUrlInput')
+    // const price = document.getElementById('priceInput')
+    // const quantity = document.getElementById('quantityInput')
+    // const category = document.getElementById('categoryInput')
+    // this.setState({
+    //   newProduct: { name, description, imgUrl, price, quantity, category }
+    // })
   }
 
   handleSubmit(event) {
     event.preventDefault()
-    const newProduct = this.state.newProduct
-    this.props.addNewproduct(newProduct)
+    const newProduct = this.state
+    this.props.addNewProduct(newProduct)
     this.routeChange()
   }
 
   routeChange() {
+    // redirect to list of items after completed
     let path = `/`
     this.props.history.push(path)
   }
 
   render() {
+    console.log('this is props in newProductForm:', this.props)
     return (
       <div>
         <div className="ui center aligned container">
           <h1>Add new Product:</h1>
         </div>
-        <Form
-          handleChange={this.handleChange.bind(this)}
-          handleSubmit={this.handleSubmit.bind(this)}
-          data={this.state.newProduct}
-          field="new product"
+        <AdminForm
+          handleChange={this.handleChange}
+          handleSubmit={this.handleSubmit}
+          data={this.state}
         />
       </div>
     )
