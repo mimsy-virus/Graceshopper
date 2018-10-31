@@ -14,8 +14,8 @@ const defaultProducts = {
 
 //ACTION CREATORS
 
-const getProducts = product => ({type: GET_PRODUCTS, product})
-const addProduct = product => ({type: ADD_PRODUCT, product})
+const getProducts = product => ({ type: GET_PRODUCTS, product })
+const addProduct = product => ({ type: ADD_PRODUCT, product })
 const removeProduct = (product, id) => ({
   type: REMOVE_PRODUCT,
   product,
@@ -31,7 +31,7 @@ const updateProduct = (product, id) => ({
 
 export const getCurrentProduct = () => async dispatch => {
   try {
-    const {data} = await axios.get('/api/products')
+    const { data } = await axios.get('/api/products')
     dispatch(getProducts(data))
   } catch (err) {
     console.log(err)
@@ -40,7 +40,7 @@ export const getCurrentProduct = () => async dispatch => {
 
 export const addNewProduct = product => async dispatch => {
   try {
-    const {data} = await axios.post('/api/products', product)
+    const { data } = await axios.post('/api/products', product)
     dispatch(addProduct(data))
   } catch (err) {
     console.log(err)
@@ -49,7 +49,7 @@ export const addNewProduct = product => async dispatch => {
 
 export const updateAProduct = (product, id) => async dispatch => {
   try {
-    const {data} = await axios.put(`/api/products/${id}`, product)
+    const { data } = await axios.put(`/api/products/${id}`, product)
     dispatch(updateProduct(data, id))
   } catch (err) {
     console.log(err)
@@ -58,7 +58,7 @@ export const updateAProduct = (product, id) => async dispatch => {
 
 export const RemoveAProduct = id => async dispatch => {
   try {
-    const {data} = await axios.delete(`/api/products/${id}`)
+    const { data } = await axios.delete(`/api/products/${id}`)
     dispatch(removeProduct(data, id))
   } catch (err) {
     console.log(err)
@@ -74,9 +74,9 @@ const newProductList = (array, filterId) => {
 export default function(state = defaultProducts, action) {
   switch (action.type) {
     case GET_PRODUCTS:
-      return {...state, productList: action.product}
+      return { ...state, productList: action.product }
     case ADD_PRODUCT:
-      return {...state, productList: [...state.productList, action.product]}
+      return { ...state, productList: [...state.productList, action.product] }
     case UPDATE_PRODUCT:
       return {
         ...state,
