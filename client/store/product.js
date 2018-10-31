@@ -1,15 +1,18 @@
 import axios from 'axios'
 import history from '../history'
+import singleProduct from '../components/singleProduct'
 
 //ACTION TYPES
 const GET_PRODUCTS = 'GET_PRODUCTS'
 const ADD_PRODUCT = 'ADD_PRODUCT'
 const REMOVE_PRODUCT = 'REMOVE_PRODUCT'
 const UPDATE_PRODUCT = 'UPDATE_PRODUCT'
+const GET_SINGLE_PRODUCT = 'GET_SINGLE_PRODUCT'
 
 // INITIAL STATE
 const defaultProducts = {
-  productList: []
+  productList: [],
+  singleProduct: {}
 }
 
 //ACTION CREATORS
@@ -26,6 +29,7 @@ const updateProduct = (product, id) => ({
   product,
   productid: id
 })
+const getSingleProduct = product => ({ type: GET_SINGLE_PRODUCT, product })
 
 //THUNK CREATORS
 
@@ -65,6 +69,15 @@ export const RemoveAProduct = id => async dispatch => {
   }
 }
 
+export const getASingleProduct = id => async dispatch => {
+  try {
+    const { data } = await axios.get(`/api/products/${id}`)
+    dispatch(getSingleProduct(data))
+  } catch (err) {
+    console.log(err)
+  }
+}
+
 //REDUCER
 
 const newProductList = (array, filterId) => {
@@ -89,6 +102,11 @@ export default function(state = defaultProducts, action) {
       return {
         ...state,
         productList: [...newProductList(state.productList, action.productid)]
+      }
+    case GET_SINGLE_PRODUCT:
+      return {
+        ...state,
+        singleProduct: action.product
       }
     default:
       return state

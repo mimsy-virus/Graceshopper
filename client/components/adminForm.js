@@ -1,5 +1,4 @@
 import React from 'react'
-import { connect } from 'react-redux'
 
 const AdminForm = ({ handleChange, handleSubmit, data }) => {
   // const formEmpty = obj => {

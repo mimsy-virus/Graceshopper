@@ -3,6 +3,7 @@ import React from 'react'
 const ProductItem = props => {
   const { product } = props
   const { name, description, imgUrl, price, category } = product
+  // console.log('PROPS IN PRODUCT ITEM:', props)
   return (
     <div className="product-item">
       <img src={imgUrl} />

@@ -28,6 +28,7 @@ const Product = db.define('product', {
   price: {
     type: Sequelize.DECIMAL(10, 2),
     allowNull: false,
+    defaultValue: 0,
     validate: {
       notEmpty: true,
       min: 0
@@ -36,6 +37,7 @@ const Product = db.define('product', {
   quantity: {
     type: Sequelize.INTEGER,
     allowNull: false,
+    defaultValue: 0,
     validate: {
       notEmpty: true,
       min: 0
