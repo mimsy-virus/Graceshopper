@@ -26,9 +26,10 @@ class ProductsContainer extends Component {
     })
   }
 
-  handleClick = id => {
-    console.log('CLICK REGISTERED')
-    // addProductToStore(id)
+  handleClick = item => {
+    // console.log('CLICK REGISTERED', item)
+    // console.log(this.props.userId)
+    this.props.addToCart(this.props.userId, item)
   }
 
   render() {
@@ -54,11 +55,14 @@ class ProductsContainer extends Component {
 
 const mapStateToProps = state => ({
   productList: state.productList,
-  isLoggedIn: !!state.user.id
+  isLoggedIn: !!state.user.id,
+  userId: state.user.id
   // isAdmin : state.user.adimin
 })
 const mapDispatchToProps = dispatch => ({
-  fetchProducts: () => dispatch(getCurrentProduct())
+  fetchProducts: () => dispatch(getCurrentProduct()),
+  addToCart: (userId, item) => dispatch(addItemToServer(userId, item))
+
   // add a prop which can add the product into the cart
 })
 
