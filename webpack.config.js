@@ -22,5 +22,6 @@ module.exports = {
         loader: 'babel-loader'
       }
     ]
-  }
+  },
+  performance: { hints: false }
 }

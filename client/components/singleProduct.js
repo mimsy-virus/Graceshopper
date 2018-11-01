@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import ProductItem from './ProductItem'
 import { getASingleProduct } from '../store/product.js'
+import { addItemToServer } from '../store/cart.js'
 
 class SingleProduct extends Component {
   constructor(props) {
@@ -18,12 +19,18 @@ class SingleProduct extends Component {
 
   handleChange() {}
   handleSubmit() {}
+  handleClick = item => {
+    // console.log('CLICK REGISTERED', item)
+    // console.log(this.props.userId)
+    this.props.addToCart(this.props.userId, item)
+  }
 
   render() {
     return (
       <ProductItem
         isLoggedIn={this.props.isLoggedIn}
         product={this.props.singleProduct}
+        onClick={this.handleClick}
       />
     )
   }
@@ -31,14 +38,15 @@ class SingleProduct extends Component {
 
 const mapStateToProps = state => {
   return {
-    singleProduct: state.productList.singleProduct,
+    singleProduct: state.product.singleProduct,
     isLoggedIn: !!state.user.id
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    getSingleProduct: id => dispatch(getASingleProduct(id))
+    getSingleProduct: id => dispatch(getASingleProduct(id)),
+    addToCart: (userId, item) => dispatch(addItemToServer(userId, item))
   }
 }
 

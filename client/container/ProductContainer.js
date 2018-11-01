@@ -5,8 +5,8 @@ import ProductItem from '../components/ProductItem'
 import ProductsList from '../components/ProductsList'
 import FilterMenu from '../components/FilterMenu'
 import Search from '../components/Search'
-import { getCurrentProduct } from '../store'
-// import { addItemToServer } from '../store/cart.js'
+import { getCurrentProduct, addItemToServer } from '../store'
+import SingleProduct from '../components/singleProduct'
 
 class ProductsContainer extends Component {
   constructor(props) {
@@ -26,18 +26,17 @@ class ProductsContainer extends Component {
     })
   }
 
-  handleClick = id => {
-    console.log('CLICK REGISTERED')
-    // addProductToStore(id)
+  handleClick = item => {
+    this.props.addToCart(this.props.userId, item)
   }
 
   render() {
     return (
-      !!this.props.productList.productList.length && (
+      !!this.props.productList.length && (
         <ProductsList title="Products">
           <FilterMenu handleChange={this.handleChange} {...this.state} />
           <Search />
-          {this.props.productList.productList.map(product => (
+          {this.props.productList.map(product => (
             <ProductItem
               key={product.id}
               product={product}
@@ -53,12 +52,15 @@ class ProductsContainer extends Component {
 }
 
 const mapStateToProps = state => ({
-  productList: state.productList,
-  isLoggedIn: !!state.user.id
+  productList: state.products.productList,
+  isLoggedIn: !!state.user.id,
+  userId: state.user.id
   // isAdmin : state.user.adimin
 })
 const mapDispatchToProps = dispatch => ({
-  fetchProducts: () => dispatch(getCurrentProduct())
+  fetchProducts: () => dispatch(getCurrentProduct()),
+  addToCart: (userId, item) => dispatch(addItemToServer(userId, item))
+
   // add a prop which can add the product into the cart
 })
 

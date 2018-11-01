@@ -55,6 +55,7 @@ const AdminForm = ({ handleChange, handleSubmit, data }) => {
     <div>
       <form className="adminFormContainer" onSubmit={handleSubmit}>
         <div className="form-group">
+          <label>Name:</label>
           <input
             className="form-control"
             placeholder="Enter a name"
@@ -65,6 +66,7 @@ const AdminForm = ({ handleChange, handleSubmit, data }) => {
           />
         </div>
         <div className="form-group">
+          <label>Description:</label>
           <input
             className="form-control"
             placeholder="Enter description"
@@ -75,6 +77,7 @@ const AdminForm = ({ handleChange, handleSubmit, data }) => {
           />
         </div>
         <div className="form-group">
+          <label>Image:</label>
           <input
             className="form-control"
             placeholder="Enter imgUrl"
@@ -85,6 +88,7 @@ const AdminForm = ({ handleChange, handleSubmit, data }) => {
           />
         </div>
         <div className="form-group">
+          <label>Price:</label>
           <input
             className="form-control"
             placeholder="Enter price"
@@ -96,6 +100,7 @@ const AdminForm = ({ handleChange, handleSubmit, data }) => {
         </div>
 
         <div className="form-group">
+          <label>Description:</label>
           <input
             className="form-control"
             placeholder="Enter quantity"
@@ -107,6 +112,7 @@ const AdminForm = ({ handleChange, handleSubmit, data }) => {
         </div>
 
         <div className="form-group">
+          <label>Categories:</label>
           <input
             className="form-control"
             placeholder="Enter categories"
