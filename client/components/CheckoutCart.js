@@ -12,7 +12,7 @@ import { Link } from 'react-router-dom'
 
 class CheckoutCart extends React.Component {
   componentDidMount() {
-    // this.props.getCartFromServer(this.props.userId)
+    this.props.getCartFromServer(this.props.userId)
     this.props.getCurrentProduct()
   }
 
