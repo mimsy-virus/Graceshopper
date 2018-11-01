@@ -2,72 +2,39 @@ const Sequelize = require('sequelize')
 const db = require('../db')
 
 const Order = db.define('order', {
-  orderProducts: {
-    type: Sequelize.ARRAY(Sequelize.JSON),
+  status: {
+    type: Sequelize.ENUM(
+      'cart',
+      'created',
+      'processing',
+      'cancelled',
+      'completed'
+    ),
     allowNull: false,
     validate: {
       notEmpty: true
-    }
-  },
-  status: {
-    type: Sequelize.STRING,
-    allowNull: false,
-    validate: {
-      notEmpty: true,
-      isIn: [['created', 'processing', 'cancelled', 'completed']]
     }
   },
   shippingAddress: {
-    type: Sequelize.STRING,
-    allowNull: false,
-    validate: {
-      notEmpty: true
-    }
+    type: Sequelize.STRING
   },
   shippingCity: {
-    type: Sequelize.STRING,
-    allowNull: false,
-    validate: {
-      notEmpty: true
-    }
+    type: Sequelize.STRING
   },
   shippingState: {
-    type: Sequelize.STRING,
-    allowNull: false,
-    validate: {
-      notEmpty: true
-    }
+    type: Sequelize.STRING
   },
   shippingZipCode: {
-    type: Sequelize.STRING,
-    allowNull: false,
-    validate: {
-      notEmpty: true
-    }
+    type: Sequelize.STRING
   },
   subTotal: {
-    type: Sequelize.DECIMAL(10, 2),
-    allowNull: false,
-    validate: {
-      notEmpty: true,
-      min: 0
-    }
+    type: Sequelize.DECIMAL(10, 2)
   },
   taxRate: {
-    type: Sequelize.DECIMAL(10, 2),
-    allowNull: false,
-    validate: {
-      notEmpty: true,
-      min: 0
-    }
+    type: Sequelize.DECIMAL(10, 2)
   },
   total: {
-    type: Sequelize.DECIMAL(10, 2),
-    allowNull: false,
-    validate: {
-      notEmpty: true,
-      min: 0
-    }
+    type: Sequelize.DECIMAL(10, 2)
   }
 })
 

@@ -5,25 +5,11 @@ const { User } = require('../server/db/models')
 const { Product } = require('../server/db/models')
 const { Review } = require('../server/db/models')
 const { Order } = require('../server/db/models')
+const { OrderProduct } = require('../server/db/models')
 
 async function seed() {
   await db.sync({ force: true })
   console.log('db synced!')
-
-  // const users = await Promise.all([
-  //   User.create({
-  //     firstName: 'Cody',
-  //     lastName: 'Dog',
-  //     email: 'cody@email.com',
-  //     password: '123'
-  //   }),
-  //   User.create({
-  //     firstName: 'Murphy',
-  //     lastName: 'Fiji',
-  //     email: 'murphy@email.com',
-  //     password: '123'
-  //   })
-  // ])
 
   const usersData = [
     {
@@ -320,40 +306,6 @@ async function seed() {
 
   const ordersData = [
     {
-      orderProducts: [
-        {
-          name: 'Glycerine',
-          description: 'S92002S',
-          imageUrl: 'http://dummyimage.com/165x125.bmp/ff4444/ffffff',
-          price: 9.99,
-          quantity: 10,
-          category: 'pill'
-        },
-        {
-          name: 'fluvoxamine maleate',
-          description: 'T565X2S',
-          imageUrl: 'http://dummyimage.com/202x128.png/5fa2dd/ffffff',
-          price: 9.99,
-          quantity: 10,
-          category: 'shot'
-        },
-        {
-          name: 'BENZALKONIUM CHLORIDE',
-          description: 'Q892',
-          imageUrl: 'http://dummyimage.com/171x130.png/ff4444/ffffff',
-          price: 9.99,
-          quantity: 10,
-          category: 'shot'
-        },
-        {
-          name: 'Warfarin Sodium',
-          description: 'T50993',
-          imageUrl: 'http://dummyimage.com/122x123.bmp/5fa2dd/ffffff',
-          price: 9.99,
-          quantity: 10,
-          category: 'shot'
-        }
-      ],
       status: 'completed',
       shippingAddress: '123 way lane',
       shippingCity: 'Miami',
@@ -363,6 +315,67 @@ async function seed() {
       taxRate: 0.06,
       total: 42.36,
       userId: 1
+    },
+    {
+      status: 'cart',
+      shippingAddress: null,
+      shippingCity: null,
+      shippingState: null,
+      shippingZipCode: null,
+      subTotal: null,
+      taxRate: null,
+      total: null,
+      userId: 1
+    },
+    {
+      status: 'processing',
+      shippingAddress: '456 clutter ave',
+      shippingCity: 'Miami',
+      shippingState: 'FL',
+      shippingZipCode: '34110',
+      subTotal: 9.99,
+      taxRate: 0.06,
+      total: 10.59,
+      userId: 2
+    }
+  ]
+
+  const orderProductsData = [
+    {
+      orderId: 1,
+      productId: 1,
+      quantity: 3,
+      price: 9.99
+    },
+    {
+      orderId: 1,
+      productId: 6,
+      quantity: 1,
+      price: 9.99
+    },
+    {
+      orderId: 2,
+      productId: 1,
+      quantity: 2,
+      price: 9.99
+    },
+    {
+      orderId: 2,
+      productId: 17,
+      quantity: 1,
+      price: 9.99
+    },
+    {
+      orderId: 2,
+      productId: 15,
+      quantity: 2,
+      price: 9.99
+    },
+    {
+      orderId: 3,
+      productId: 11,
+      quantity: 1,
+      price: 9.99
     }
   ]
 
@@ -370,11 +383,13 @@ async function seed() {
   await Product.bulkCreate(productsData)
   await Review.bulkCreate(reviewsData)
   await Order.bulkCreate(ordersData)
+  await OrderProduct.bulkCreate(orderProductsData)
 
   console.log(`seeded ${usersData.length} users`)
-  console.log(`seeded ${productsData.length} users`)
-  console.log(`seeded ${reviewsData.length} users`)
-  console.log(`seeded ${ordersData.length} users`)
+  console.log(`seeded ${productsData.length} products`)
+  console.log(`seeded ${reviewsData.length} reviews`)
+  console.log(`seeded ${ordersData.length} orders`)
+  console.log(`seeded ${orderProductsData.length} order products`)
   console.log(`seeded successfully`)
 }
 
