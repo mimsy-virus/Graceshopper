@@ -20,6 +20,13 @@ async function seed() {
       isAdmin: true
     },
     {
+      firstName: 'James',
+      lastName: 'Stephens',
+      email: 'brrp1@email.com',
+      password: 'abcd',
+      isAdmin: true
+    },
+    {
       firstName: 'Rui',
       lastName: 'Yang',
       email: 'rui@email.com',
@@ -379,7 +386,62 @@ async function seed() {
     }
   ]
 
-  await User.bulkCreate(usersData)
+  // await User.bulkCreate(usersData)
+  const users = await Promise.all([
+    User.create({
+      firstName: 'James',
+      lastName: 'Stephens',
+      email: 'brrp@email.com',
+      password: '123',
+      isAdmin: true
+    }),
+    User.create({
+      firstName: 'James',
+      lastName: 'Stephens',
+      email: 'brrp1@email.com',
+      password: 'abcd',
+      isAdmin: true
+    }),
+    User.create({
+      firstName: 'Rui',
+      lastName: 'Yang',
+      email: 'rui@email.com',
+      password: '123',
+      isAdmin: true
+    }),
+    User.create({
+      firstName: 'Monferd',
+      lastName: 'Collin',
+      email: 'monmon@email.com',
+      password: '123',
+      isAdmin: true
+    }),
+    User.create({
+      firstName: 'Chris',
+      lastName: 'Li',
+      email: 'chrisLi@email.com',
+      password: '123',
+      isAdmin: true
+    }),
+    User.create({
+      firstName: 'Cody',
+      lastName: 'Dog',
+      email: 'cody@email.com',
+      password: '123'
+    }),
+    User.create({
+      firstName: 'Not',
+      lastName: 'Cody',
+      email: 'notcody@email.com',
+      password: '123'
+    }),
+    User.create({
+      firstName: 'Murphy',
+      lastName: 'Fiji',
+      email: 'murphy@email.com',
+      password: '123'
+    })
+  ])
   await Product.bulkCreate(productsData)
   await Review.bulkCreate(reviewsData)
   await Order.bulkCreate(ordersData)
