@@ -1,74 +1,17 @@
 import axios from 'axios'
-import history from '../history'
-import singleProduct from '../components/singleProduct'
 
 //ACTION TYPES
-const GET_PRODUCTS = 'GET_PRODUCTS'
-const ADD_PRODUCT = 'ADD_PRODUCT'
-const REMOVE_PRODUCT = 'REMOVE_PRODUCT'
-const UPDATE_PRODUCT = 'UPDATE_PRODUCT'
 const GET_SINGLE_PRODUCT = 'GET_SINGLE_PRODUCT'
 
-// INITIAL STATE
-const defaultProducts = {
-  productList: [],
+//INITIAL STATE
+const defaultSingleProduct = {
   singleProduct: {}
 }
 
 //ACTION CREATORS
-
-const getProducts = product => ({ type: GET_PRODUCTS, product })
-const addProduct = product => ({ type: ADD_PRODUCT, product })
-const removeProduct = (product, id) => ({
-  type: REMOVE_PRODUCT,
-  product,
-  productid: id
-})
-const updateProduct = (product, id) => ({
-  type: UPDATE_PRODUCT,
-  product,
-  productid: id
-})
 const getSingleProduct = product => ({ type: GET_SINGLE_PRODUCT, product })
 
 //THUNK CREATORS
-
-export const getCurrentProduct = () => async dispatch => {
-  try {
-    const { data } = await axios.get('/api/products')
-    dispatch(getProducts(data))
-  } catch (err) {
-    console.log(err)
-  }
-}
-
-export const addNewProduct = product => async dispatch => {
-  try {
-    const { data } = await axios.post('/api/products', product)
-    dispatch(addProduct(data))
-  } catch (err) {
-    console.log(err)
-  }
-}
-
-export const updateAProduct = (product, id) => async dispatch => {
-  try {
-    const { data } = await axios.put(`/api/products/${id}`, product)
-    dispatch(updateProduct(data, id))
-  } catch (err) {
-    console.log(err)
-  }
-}
-
-export const RemoveAProduct = id => async dispatch => {
-  try {
-    const { data } = await axios.delete(`/api/products/${id}`)
-    dispatch(removeProduct(data, id))
-  } catch (err) {
-    console.log(err)
-  }
-}
-
 export const getASingleProduct = id => async dispatch => {
   try {
     const { data } = await axios.get(`/api/products/${id}`)
@@ -79,35 +22,13 @@ export const getASingleProduct = id => async dispatch => {
 }
 
 //REDUCER
-
-const newProductList = (array, filterId) => {
-  return array.filter(elem => elem.id !== filterId)
-}
-
-export default function(state = defaultProducts, action) {
+export default function(state = defaultSingleProduct, action) {
   switch (action.type) {
-    case GET_PRODUCTS:
-      return { ...state, productList: action.product }
-    case ADD_PRODUCT:
-      return { ...state, productList: [...state.productList, action.product] }
-    case UPDATE_PRODUCT:
-      return {
-        ...state,
-        productList: [
-          ...newProductList(state.productList, action.productid),
-          action.product
-        ]
-      }
-    case REMOVE_PRODUCT:
-      return {
-        ...state,
-        productList: [...newProductList(state.productList, action.productid)]
-      }
     case GET_SINGLE_PRODUCT:
       return {
-        ...state,
         singleProduct: action.product
       }
+
     default:
       return state
   }

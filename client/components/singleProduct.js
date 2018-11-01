@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import ProductItem from './ProductItem'
-import { getASingleProduct } from '../store/product.js'
+import { getASingleProduct } from '../store/products.js'
 
 class SingleProduct extends Component {
   constructor(props) {
@@ -33,7 +33,7 @@ class SingleProduct extends Component {
 
 const mapStateToProps = state => {
   return {
-    singleProduct: state.productList.singleProduct
+    singleProduct: state.product.singleProduct
   }
 }
 

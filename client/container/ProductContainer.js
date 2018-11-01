@@ -6,7 +6,7 @@ import ProductsList from '../components/ProductsList'
 import FilterMenu from '../components/FilterMenu'
 import Search from '../components/Search'
 import { getCurrentProduct } from '../store'
-import singleProduct from '../components/singleProduct'
+import SingleProduct from '../components/singleProduct'
 
 class ProductsContainer extends Component {
   constructor(props) {
@@ -29,11 +29,11 @@ class ProductsContainer extends Component {
   render() {
     console.log(this.props)
     return (
-      !!this.props.productList.productList.length && (
+      !!this.props.productList.length && (
         <ProductsList title="Products">
           <FilterMenu handleChange={this.handleChange} {...this.state} />
           <Search />
-          {this.props.productList.productList.map(product => (
+          {this.props.productList.map(product => (
             <ProductItem
               key={product.id}
               product={product}
@@ -61,7 +61,7 @@ class ProductsContainer extends Component {
 // }
 
 const mapStateToProps = state => ({
-  productList: state.productList
+  productList: state.products.productList
   // isAdmin : state.user.adimin
 })
 const mapDispatchToProps = dispatch => ({
