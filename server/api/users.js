@@ -14,9 +14,11 @@ router.get('/', async (req, res, next) => {
         'lastName',
         'email',
         'phone',
-        'billingAddress',
-        'shippingAddress',
-        'userRole'
+        'userAddress',
+        'userCity',
+        'userState',
+        'userZipCode',
+        'isAdmin'
       ]
     })
     res.json(users)
