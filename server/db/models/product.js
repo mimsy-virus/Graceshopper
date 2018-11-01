@@ -44,11 +44,10 @@ const Product = db.define('product', {
     }
   },
   category: {
-    type: Sequelize.STRING,
+    type: Sequelize.ENUM('pill', 'shot'),
     allowNull: false,
     validate: {
-      notEmpty: true,
-      isIn: [['pills', 'shots']]
+      notEmpty: true
     }
   }
 })
