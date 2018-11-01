@@ -6,7 +6,8 @@ import ProductsList from '../components/ProductsList'
 import FilterMenu from '../components/FilterMenu'
 import Search from '../components/Search'
 import { getCurrentProduct } from '../store'
-import singleProduct from '../components/singleProduct'
+import SingleProduct from '../components/singleProduct'
+// import { addItemToServer } from '../store/cart.js'
 
 class ProductsContainer extends Component {
   constructor(props) {
@@ -26,18 +27,24 @@ class ProductsContainer extends Component {
     })
   }
 
+  handleClick = id => {
+    console.log('CLICK REGISTERED')
+    // addProductToStore(id)
+  }
+
   render() {
-    console.log(this.props)
     return (
-      !!this.props.productList.productList.length && (
+      !!this.props.productList.length && (
         <ProductsList title="Products">
           <FilterMenu handleChange={this.handleChange} {...this.state} />
           <Search />
-          {this.props.productList.productList.map(product => (
+          {this.props.productList.map(product => (
             <ProductItem
               key={product.id}
               product={product}
-              onAddToCartClicked
+              isLoggedIn={this.props.isLoggedIn}
+              // onAddToCartClicked
+              onClick={this.handleClick}
             />
           ))}
         </ProductsList>
@@ -46,26 +53,14 @@ class ProductsContainer extends Component {
   }
 }
 
-// ProductsContainer.propTypes = {
-//   products: PropTypes.arrayOf(
-//     PropTypes.shape({
-//       id: PropTypes.number.isRequired,
-//       name: PropTypes.string.isRequired,
-//       description: PropTypes.string.isRequired,
-//       imgUrl: PropTypes.string.isRequired,
-//       price: PropTypes.number.isRequired,
-//       quantity: PropTypes.number.isRequired,
-//       category: PropTypes.string.isRequired
-//     })
-//   ).isRequired
-// }
-
 const mapStateToProps = state => ({
-  productList: state.productList
+  productList: state.products.productList,
+  isLoggedIn: !!state.user.id
   // isAdmin : state.user.adimin
 })
 const mapDispatchToProps = dispatch => ({
   fetchProducts: () => dispatch(getCurrentProduct())
+  // add a prop which can add the product into the cart
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductsContainer)

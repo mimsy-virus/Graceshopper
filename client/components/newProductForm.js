@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { addNewProduct } from '../store/product'
+import { addNewProduct } from '../store/products'
 import AdminForm from './AdminForm'
 
 class NewProductForm extends Component {
@@ -23,15 +23,6 @@ class NewProductForm extends Component {
     this.setState({
       [event.target.name]: event.target.value
     })
-    // const name = document.getElementById('nameInput')
-    // const description = document.getElementById('descriptionInput')
-    // const imgUrl = document.getElementById('imgUrlInput')
-    // const price = document.getElementById('priceInput')
-    // const quantity = document.getElementById('quantityInput')
-    // const category = document.getElementById('categoryInput')
-    // this.setState({
-    //   newProduct: { name, description, imgUrl, price, quantity, category }
-    // })
   }
 
   handleSubmit(event) {
@@ -48,7 +39,6 @@ class NewProductForm extends Component {
   }
 
   render() {
-    console.log('this is props in newProductForm:', this.props)
     return (
       <div>
         <div className="ui center aligned container">

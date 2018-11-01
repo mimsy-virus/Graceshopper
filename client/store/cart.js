@@ -36,28 +36,28 @@ const removeItemAction = itemId => ({ type: REMOVE_ITEM, itemId })
 const clearCartAction = () => ({ type: CLEAR_CART })
 
 //THUNK CREATOR
-export const getCartFromServer = cartId => async dispatch => {
+export const getCartFromServer = userId => async dispatch => {
   try {
-    const { data } = await axios.get(`api/cart/${cartId}`)
+    const { data } = await axios.get(`api/cart/${userId}`)
     dispatch(getCartAction(data))
   } catch (err) {
     console.log(err)
   }
 }
 
-export const addItemToServer = (cartId, item) => async dispatch => {
+export const addItemToServer = (userId, item) => async dispatch => {
   try {
-    const { data } = await axios.post(`api/cart/${cartId}`, item)
+    const { data } = await axios.post(`api/cart/${userId}`, item)
     dispatch(addItemAction(data))
   } catch (err) {
     console.log(err)
   }
 }
 
-export const updateItemToServer = (cartId, item) => async dispatch => {
+export const updateItemToServer = (userId, item) => async dispatch => {
   try {
     const { data } = await axios.put(
-      `api/cart/${cartId}/${Object.keys(item)[0]}`,
+      `api/cart/${userId}/${Object.keys(item)[0]}`,
       item
     )
     dispatch(updateItemAction(data))
@@ -66,18 +66,18 @@ export const updateItemToServer = (cartId, item) => async dispatch => {
   }
 }
 
-export const removeItemFromServer = (cartId, itemId) => async dispatch => {
+export const removeItemFromServer = (userId, itemId) => async dispatch => {
   try {
-    const { data } = await axios.delete(`api/cart/${cartId}/${itemId}`)
+    const { data } = await axios.delete(`api/cart/${userId}/${itemId}`)
     dispatch(removeItemAction(Object.keys(data)[0]))
   } catch (err) {
     console.log(err)
   }
 }
 
-export const clearCartFromServer = cartId => async dispatch => {
+export const clearCartFromServer = userId => async dispatch => {
   try {
-    const { data } = await axios.delete(`api/cart/${cartId}`)
+    const { data } = await axios.delete(`api/cart/${userId}`)
     dispatch(clearCartAction())
   } catch (err) {
     console.log(err)
