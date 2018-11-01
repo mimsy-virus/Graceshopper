@@ -5,39 +5,28 @@ import {
   updateItemToServer,
   removeItemFromServer,
   clearCartFromServer,
-  etCurrentProduct,
   getCurrentProduct
 } from '../store'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 class CheckoutCart extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      userCart: {
-        1: 2,
-        2: 1
-      }
-    }
-  }
-
   componentDidMount() {
-    // this.props.getCartFromServer(this.props.match.params.id)
+    // this.props.getCartFromServer(this.props.userId)
     this.props.getCurrentProduct()
   }
 
   handleSubmit(event) {
     event.preventDefault()
-    this.props.removeItemFromServer(
-      this.props.match.params.id,
-      event.target.value
-    )
+    this.props.removeItemFromServer(this.props.userId, event.target.value)
   }
 
   render() {
-    if (this.state.userCart && this.props.productList.length > 0) {
-      const itemList = this.state.userCart
+    if (
+      Object.keys(this.props.userCart).length > 0 &&
+      this.props.productList.length > 0
+    ) {
+      const itemList = this.props.userCart
       const productList = this.props.productList
       return (
         <div role="list" className="ui divided middle aligned list">
@@ -77,7 +66,8 @@ class CheckoutCart extends React.Component {
 
 const mapStateToProps = state => ({
   userCart: state.cart.userCart,
-  productList: state.products.productList
+  productList: state.products.productList,
+  userId: state.user.id
 })
 
 const mapDispatchToProps = dispatch => ({

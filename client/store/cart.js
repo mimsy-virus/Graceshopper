@@ -9,11 +9,7 @@ const UPDATE_ITEM = 'UPDATE_ITEM'
 
 // INITIAL STATE
 const defaultCart = {
-  userCart: {
-    //{item1: item qty},
-    //{item2: item qty},
-    // ...
-  }
+  userCart: {}
 }
 
 //ACTION CREATORS
@@ -46,12 +42,13 @@ export const getCartFromServer = userId => async dispatch => {
 }
 
 export const addItemToServer = (userId, item) => async dispatch => {
-  try {
-    const { data } = await axios.post(`api/cart/${userId}`, item)
-    dispatch(addItemAction(data))
-  } catch (err) {
-    console.log(err)
-  }
+  // try {
+  //   const { data } = await axios.post(`api/cart/${userId}`, item)
+  //   dispatch(addItemAction(data))
+  // } catch (err) {
+  //   console.log(err)
+  // }
+  dispatch(addItemAction(item))
 }
 
 export const updateItemToServer = (userId, item) => async dispatch => {
@@ -88,7 +85,7 @@ export const clearCartFromServer = userId => async dispatch => {
 export default function(state = defaultCart, action) {
   switch (action.type) {
     case GET_CART:
-      return { ...state, userCart: action.cart }
+      return { userCart: action.cart }
 
     case ADD_ITEM:
       return {
@@ -112,6 +109,6 @@ export default function(state = defaultCart, action) {
       }
 
     default:
-      return { state }
+      return state
   }
 }
