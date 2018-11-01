@@ -1,27 +1,99 @@
 import React from 'react'
-import getCartFromServer from '../store/cart'
-import addItemToServer from '../store/cart'
-import updateItemToServer from '../store/cart'
-import removeItemFromServer from '../store/cart'
-import clearCartFromServer from '../store/cart'
+import {
+  getCartFromServer,
+  addItemToServer,
+  updateItemToServer,
+  removeItemFromServer,
+  clearCartFromServer,
+  etCurrentProduct,
+  getCurrentProduct
+} from '../store'
+import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 class CheckoutCart extends React.Component {
-  // constructor(props) {
-  //   super(props)
-  //   this.state = {
-  //     cart: {}
-  //   }
-  // }
+  constructor(props) {
+    super(props)
+    this.state = {
+      userCart: {
+        1: 2,
+        2: 1
+      }
+    }
+  }
+
+  componentDidMount() {
+    // this.props.getCartFromServer(this.props.match.params.id)
+    this.props.getCurrentProduct()
+  }
+
+  handleSubmit(event) {
+    event.preventDefault()
+    this.props.removeItemFromServer(
+      this.props.match.params.id,
+      event.target.value
+    )
+  }
+
+  render() {
+    if (this.state.userCart && this.props.productList.length > 0) {
+      const itemList = this.state.userCart
+      const productList = this.props.productList
+      return (
+        <div role="list" className="ui divided middle aligned list">
+          {Object.keys(itemList).map(elem => {
+            const product = productList.find(
+              product => product.id === Number(elem)
+            )
+            return (
+              <div role="listitem" className="item" key={elem}>
+                <div className="right floated content">
+                  <button
+                    className="ui negative button"
+                    type="submit"
+                    role="button"
+                    value={elem}
+                    onClick={this.handleSubmit.bind(this)}
+                  >
+                    X
+                  </button>
+                </div>
+                <img src={product.imgUrl} className="ui avatar image" />
+                <div className="content">
+                  <div className="header">
+                    <Link to={`/products/${elem}`}>
+                      <li>{product.name}</li>
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            )
+          })}
+        </div>
+      )
+    } else return <h1>Cart is Empty!</h1>
+  }
 }
 
 const mapStateToProps = state => ({
-  userCart: this.state.cart.userCart
+  userCart: state.cart.userCart,
+  productList: state.products.productList
 })
 
 const mapDispatchToProps = dispatch => ({
   getCartFromServer: userId => dispatch(getCartFromServer(userId)),
+
   addItemToServer: (userId, item) => dispatch(addItemToServer(userId, item)),
-  updateItemToServer: () => dispatch(),
-  removeItemFromServer: () => dispatch(),
-  clearCartFromServer: () => dispatch()
+
+  updateItemToServer: (userId, item) =>
+    dispatch(updateItemToServer(userId, item)),
+
+  removeItemFromServer: (userId, itemId) =>
+    dispatch(removeItemFromServer(userId, itemId)),
+
+  clearCartFromServer: userId => dispatch(clearCartFromServer(userId)),
+
+  getCurrentProduct: () => dispatch(getCurrentProduct())
 })
+
+export default connect(mapStateToProps, mapDispatchToProps)(CheckoutCart)

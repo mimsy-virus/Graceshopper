@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import ProductItem from './ProductItem'
-import { getASingleProduct } from '../store/products.js'
+import { getASingleProduct } from '../store/product.js'
 
 class SingleProduct extends Component {
   constructor(props) {
