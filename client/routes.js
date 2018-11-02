@@ -10,6 +10,7 @@ import ProductContainer from './container/ProductContainer'
 import SingleProduct from './components/singleProduct'
 import Home from './components/Home'
 import Cart from './components/CheckoutCart'
+import CheckoutPage from './components/CheckoutPage'
 
 /**
  * COMPONENT
@@ -36,6 +37,7 @@ class Routes extends Component {
             <Route path="/newProductForm" component={newProductForm} />
             <Route exact path="/home" component={UserHome} />
             <Route exact path="/" component={UserHome} />
+            <Route exact path="/checkout" component={CheckoutPage} />
           </Switch>
         )}
         {!isLoggedIn && (
