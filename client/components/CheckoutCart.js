@@ -11,11 +11,12 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 class CheckoutCart extends React.Component {
+
   async componentDidMount() {
     await this.props.getCurrentProduct()
-    console.log('user id:', this.props.userId)
     await this.props.getCartFromServer(this.props.userId)
-  }
+
+  
 
   handleSubmit(event) {
     event.preventDefault()
