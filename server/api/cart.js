@@ -12,6 +12,7 @@ router.get('/:id', async (req, res, next) => {
         status: 'cart'
       }
     })
+
     if (!order) return res.status(404).send('Not found')
 
     const cartData = await OrderProduct.findAll({
@@ -34,14 +35,19 @@ router.get('/:id', async (req, res, next) => {
 
 router.post('/:id', async (req, res, next) => {
   try {
-    const order = await Order.findOne({
+    let order = await Order.findOne({
       where: {
         userId: req.params.id,
         status: 'cart'
       }
     })
 
-    if (!order) return res.status(404).send('Not found')
+    if (!order) {
+      order = await Order.create({
+        status: 'cart',
+        userId: req.params.id
+      })
+    }
 
     const cartData = await OrderProduct.create({
       orderId: order.id,
