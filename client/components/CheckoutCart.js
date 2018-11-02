@@ -22,6 +22,7 @@ class CheckoutCart extends React.Component {
   }
 
   render() {
+    console.log('this is props:', this.props)
     if (
       Object.keys(this.props.userCart).length > 0 &&
       this.props.productList.length > 0
@@ -49,6 +50,8 @@ class CheckoutCart extends React.Component {
                 </div>
                 <img src={product.imgUrl} className="ui avatar image" />
                 <div className="content">
+                  {console.log('this is itemlist', this.props.userCart[elem])}
+                  <h3>Quantity: {this.props.userCart[elem]}</h3>
                   <div className="header">
                     <Link to={`/products/${elem}`}>
                       <li>{product.name}</li>
@@ -65,6 +68,7 @@ class CheckoutCart extends React.Component {
 }
 
 const mapStateToProps = state => ({
+  // NOT SAVING THE CART IN THE DATABASE, ITS ON THE STORE
   userCart: state.cart.userCart,
   productList: state.products.productList,
   userId: state.user.id

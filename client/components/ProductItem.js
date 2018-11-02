@@ -6,7 +6,12 @@ const ProductItem = props => {
   const product = props.product
   const { name, description, imgUrl, price, category } = product
   const productId = product.id
-  const qty = 1
+  let quantity = 1
+
+  function handleChange(event) {
+    quantity = event.target.value
+  }
+
   return (
     <div className="product-item">
       <img src={imgUrl} />
@@ -17,15 +22,20 @@ const ProductItem = props => {
       </div>
       <h2>${price}</h2>
       {props.isLoggedIn && (
-        <button
-          type="button"
-          value={name}
-          onClick={() => props.onClick({ [productId]: qty })}
-        >
-          ADD TO CART
-        </button>
+        <div>
+          <form>
+            <label>Quantity:</label>
+            <input type="number" onChange={handleChange} />
+          </form>
+          <button
+            type="button"
+            value={name}
+            onClick={() => props.onClick({ [productId]: quantity })}
+          >
+            ADD TO CART
+          </button>
+        </div>
       )}
-      {/* <h3>ADD TO CART</h3> */}
     </div>
   )
 }
