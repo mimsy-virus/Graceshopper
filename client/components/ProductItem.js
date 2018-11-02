@@ -14,7 +14,7 @@ const ProductItem = props => {
 
   return (
     <div className="product-item">
-      <img src={imgUrl} />
+      <img className="product-image" src={imgUrl} />
       <div>
         <Link to={`/products/${props.product.id}`}>{name}</Link>
         <p>{description}</p>

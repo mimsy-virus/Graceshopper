@@ -30,14 +30,16 @@ class CheckoutCart extends React.Component {
       const itemList = this.props.userCart
       const productList = this.props.productList
       let subtotal = 0
+      let curPrice = 0
       return (
         <div role="list" className="ui divided middle aligned list">
           {Object.keys(itemList).map(elem => {
             const product = productList.find(
               product => product.id === Number(elem)
             )
-            subtotal +=
-              Number(product.price) * Number(this.props.userCart[elem])
+            curPrice = Number(product.price) * Number(this.props.userCart[elem])
+            subtotal += curPrice
+
             return (
               <div role="listitem" className="item" key={elem}>
                 <div className="right floated content">
@@ -57,6 +59,10 @@ class CheckoutCart extends React.Component {
                   <form>
                     {/* <input type = 'number' onChange={}/> */}
                     <h3>Quantity: {this.props.userCart[elem]}</h3>
+                    <h2>
+                      price:
+                      {curPrice}
+                    </h2>
                   </form>
                   <div className="header">
                     <Link to={`/products/${elem}`}>

@@ -72,7 +72,7 @@ export const removeItemFromServer = (userId, itemId) => async dispatch => {
 
 export const clearCartFromServer = userId => async dispatch => {
   try {
-    const { data } = await axios.delete(`api/cart/${userId}`)
+    const { data } = await axios.delete(`api/cart/clear/delete/${userId}`)
     dispatch(clearCartAction())
   } catch (err) {
     console.log(err)
