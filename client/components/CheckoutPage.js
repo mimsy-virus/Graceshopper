@@ -1,61 +1,119 @@
 import React, { Component } from 'react'
 import Checkout from './CheckoutForm'
+import axios from 'axios'
 
 class CheckoutPage extends Component {
   constructor(props) {
     super(props)
     this.state = {
       isCheckoutStarted: false,
-      firstName: ''
+      shippingInfo: {
+        firstName: '',
+        lastName: '',
+        shippingAddress: '',
+        shippingCity: '',
+        shippingState: '',
+        shippingZipCode: ''
+      }
     }
   }
-  handleChange = () => {
-    this.setState({ isCheckoutStarted: true })
+  handleChange = evt => {
+    this.setState({
+      ...this.state,
+      shippingInfo: {
+        ...this.state.shippingInfo,
+        [evt.target.name]: evt.target.value
+      }
+    })
+  }
+
+  handleSubmit = async evt => {
+    evt.preventDefault()
+    try {
+      const { data } = await axios.post('/api/orders', this.state.shippingInfo)
+      console.log(data)
+      this.setState({ ...this.state, isCheckoutStarted: true })
+    } catch (err) {
+      console.log(err)
+    }
   }
 
   render() {
     console.log(this.state)
+    const { shippingInfo, isCheckoutStarted } = this.state
+    const {
+      firstName,
+      lastName,
+      shippingAddress,
+      shippingCity,
+      shippingState,
+      shippingZipCode
+    } = shippingInfo
     return (
       <div>
+        <h3>Shipping Info:</h3>
         <form onSubmit={this.handleSubmit}>
           <label>
             First Name
-            <input type="text" value={this.state.firstName} />
+            <input
+              type="text"
+              name="firstName"
+              onChange={this.handleChange}
+              value={firstName}
+            />
           </label>
           <label>
             Last Name
-            <input type="text" value={this.state.lastName} />
+            <input
+              type="text"
+              name="lastName"
+              onChange={this.handleChange}
+              value={lastName}
+            />
           </label>
           <label>
             Address
-            <input type="text" value={this.state.userAddress} />
+            <input
+              type="text"
+              name="shippingAddress"
+              onChange={this.handleChange}
+              value={shippingAddress}
+            />
           </label>
           <label>
             City
-            <input type="text" value={this.state.userCity} />
+            <input
+              type="text"
+              name="shippingCity"
+              onChange={this.handleChange}
+              value={shippingCity}
+            />
           </label>
           <label>
             State
-            <input type="text" value={this.state.userState} />
+            <input
+              type="text"
+              name="shippingState"
+              onChange={this.handleChange}
+              value={shippingState}
+            />
           </label>
           <label>
             Zip Code
-            <input type="text" value={this.state.userZip} />
+            <input
+              type="text"
+              name="shippingZipCode"
+              onChange={this.handleChange}
+              value={shippingZipCode}
+            />
           </label>
-          <button
-            className="checkout-botton"
-            type="submit"
-            onClick={() => {
-              console.log('Clicked!!')
-              this.handleChange()
-            }}
-          >
+          <button className="checkout-botton" type="submit">
             Checkout
           </button>
         </form>
         <div />
 
-        {this.state.isCheckoutStarted && <Checkout />}
+        {isCheckoutStarted && <Checkout />}
       </div>
     )
   }
