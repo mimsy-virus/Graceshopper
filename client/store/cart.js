@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { runInNewContext } from 'vm'
 
 //ACTION TYPES
 const GET_CART = 'GET_CART'
@@ -42,21 +43,18 @@ export const getCartFromServer = userId => async dispatch => {
 }
 
 export const addItemToServer = (userId, item) => async dispatch => {
-  // try {
-  //   const { data } = await axios.post(`api/cart/${userId}`, item)
-  //   dispatch(addItemAction(data))
-  // } catch (err) {
-  //   console.log(err)
-  // }
+  try {
+    const { data } = await axios.post(`api/cart/${userId}`, item)
+    dispatch(addItemAction(data))
+  } catch (err) {
+    console.log(err)
+  }
   dispatch(addItemAction(item))
 }
 
 export const updateItemToServer = (userId, item) => async dispatch => {
   try {
-    const { data } = await axios.put(
-      `api/cart/${userId}/${Object.keys(item)[0]}`,
-      item
-    )
+    const { data } = await axios.put(`api/cart/${userId}`, item)
     dispatch(updateItemAction(data))
   } catch (err) {
     console.log(err)
