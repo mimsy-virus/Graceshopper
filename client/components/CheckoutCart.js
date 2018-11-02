@@ -11,9 +11,10 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 class CheckoutCart extends React.Component {
-  componentDidMount() {
-    this.props.getCartFromServer(this.props.userId)
-    this.props.getCurrentProduct()
+  async componentDidMount() {
+    await this.props.getCurrentProduct()
+    console.log('user id:', this.props.userId)
+    await this.props.getCartFromServer(this.props.userId)
   }
 
   handleSubmit(event) {
@@ -22,8 +23,9 @@ class CheckoutCart extends React.Component {
   }
 
   render() {
-    console.log('this is props:', this.props)
+    // console.log('this is props:', this.props)
     if (
+      this.props.userId &&
       Object.keys(this.props.userCart).length > 0 &&
       this.props.productList.length > 0
     ) {
@@ -53,7 +55,7 @@ class CheckoutCart extends React.Component {
                     X
                   </button>
                 </div>
-                <img src={product.imgUrl} className="ui avatar image" />
+                <img src={product.imgUrl} className="product-img" />
                 <div className="content">
                   {console.log('this is itemlist', this.props.userCart[elem])}
                   <form>
@@ -73,7 +75,9 @@ class CheckoutCart extends React.Component {
               </div>
             )
           })}
-          <h3>SUBTOTAL : {subtotal}</h3>
+          <h3>SUBTOTAL : {Math.round(subtotal * 100) / 100}</h3>
+
+          <Link to="/checkout">Click to Checkout</Link>
         </div>
       )
     } else return <h1>Cart is Empty!</h1>
