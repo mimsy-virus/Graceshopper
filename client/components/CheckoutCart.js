@@ -29,12 +29,15 @@ class CheckoutCart extends React.Component {
     ) {
       const itemList = this.props.userCart
       const productList = this.props.productList
+      let subtotal = 0
       return (
         <div role="list" className="ui divided middle aligned list">
           {Object.keys(itemList).map(elem => {
             const product = productList.find(
               product => product.id === Number(elem)
             )
+            subtotal +=
+              Number(product.price) * Number(this.props.userCart[elem])
             return (
               <div role="listitem" className="item" key={elem}>
                 <div className="right floated content">
@@ -61,6 +64,7 @@ class CheckoutCart extends React.Component {
               </div>
             )
           })}
+          <h3>SUBTOTAL : {subtotal}</h3>
         </div>
       )
     } else return <h1>Cart is Empty!</h1>
