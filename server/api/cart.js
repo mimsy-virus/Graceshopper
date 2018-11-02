@@ -31,3 +31,118 @@ router.get('/:id', async (req, res, next) => {
     next(err)
   }
 })
+
+router.post('/:id', async (req, res, next) => {
+  try {
+    const order = await Order.findOne({
+      where: {
+        userId: req.params.id,
+        status: 'cart'
+      }
+    })
+
+    if (!order) return res.status(404).send('Not found')
+
+    const cartData = await OrderProduct.create({
+      orderId: order.id,
+      productId: Object.keys(req.body)[0],
+      quantity: Object.values(req.body)[0],
+      price: 9.99
+    })
+
+    if (!cartData) return res.status(404).send('Not found')
+
+    res.json({ [cartData.productId]: cartData.quantity })
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.put('/:id', async (req, res, next) => {
+  try {
+    const order = await Order.findOne({
+      where: {
+        userId: req.params.id,
+        status: 'cart'
+      }
+    })
+    if (!order) return res.status(404).send('Not found')
+
+    const cartData = await OrderProduct.update(
+      {
+        quantity: Object.values(req.body)[0]
+      },
+      {
+        where: {
+          orderId: order.id,
+          productId: Object.keys(req.body)[0]
+        }
+      }
+    )
+    if (!cartData) return res.status(404).send('Not found')
+
+    const itemData = await OrderProduct.findOne({
+      where: {
+        orderId: order.id,
+        productId: Object.keys(req.body)[0]
+      }
+    })
+    if (!itemData) return res.status(404).send('Not found')
+
+    console.log(itemData)
+    res.json({ [itemData.productId]: itemData.quantity })
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.delete('/clear/delete/:id', async (req, res, next) => {
+  console.log('clear cart')
+  try {
+    const order = await Order.findOne({
+      where: {
+        userId: req.params.id,
+        status: 'cart'
+      }
+    })
+
+    if (!order) return res.status(404).send('Not found')
+
+    const cartData = await OrderProduct.destroy({
+      where: {
+        orderId: order.id
+      }
+    })
+
+    if (!cartData) return res.status(404).send('Not found')
+    res.json()
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.delete('/:id/:itemId', async (req, res, next) => {
+  console.log('clear item')
+  try {
+    const order = await Order.findOne({
+      where: {
+        userId: req.params.id,
+        status: 'cart'
+      }
+    })
+
+    if (!order) return res.status(404).send('Not found')
+
+    const cartData = await OrderProduct.destroy({
+      where: {
+        orderId: order.id,
+        productId: req.params.itemId
+      }
+    })
+
+    if (!cartData) return res.status(404).send('Not found')
+    res.json()
+  } catch (err) {
+    next(err)
+  }
+})
