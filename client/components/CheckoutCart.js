@@ -22,18 +22,22 @@ class CheckoutCart extends React.Component {
   }
 
   render() {
+    console.log('this is props:', this.props)
     if (
       Object.keys(this.props.userCart).length > 0 &&
       this.props.productList.length > 0
     ) {
       const itemList = this.props.userCart
       const productList = this.props.productList
+      let subtotal = 0
       return (
         <div role="list" className="ui divided middle aligned list">
           {Object.keys(itemList).map(elem => {
             const product = productList.find(
               product => product.id === Number(elem)
             )
+            subtotal +=
+              Number(product.price) * Number(this.props.userCart[elem])
             return (
               <div role="listitem" className="item" key={elem}>
                 <div className="right floated content">
@@ -49,6 +53,11 @@ class CheckoutCart extends React.Component {
                 </div>
                 <img src={product.imgUrl} className="ui avatar image" />
                 <div className="content">
+                  {console.log('this is itemlist', this.props.userCart[elem])}
+                  <form>
+                    {/* <input type = 'number' onChange={}/> */}
+                    <h3>Quantity: {this.props.userCart[elem]}</h3>
+                  </form>
                   <div className="header">
                     <Link to={`/products/${elem}`}>
                       <li>{product.name}</li>
@@ -58,6 +67,7 @@ class CheckoutCart extends React.Component {
               </div>
             )
           })}
+          <h3>SUBTOTAL : {subtotal}</h3>
         </div>
       )
     } else return <h1>Cart is Empty!</h1>
@@ -65,6 +75,7 @@ class CheckoutCart extends React.Component {
 }
 
 const mapStateToProps = state => ({
+  // NOT SAVING THE CART IN THE DATABASE, ITS ON THE STORE
   userCart: state.cart.userCart,
   productList: state.products.productList,
   userId: state.user.id
