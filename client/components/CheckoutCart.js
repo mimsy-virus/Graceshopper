@@ -54,7 +54,10 @@ class CheckoutCart extends React.Component {
                 <img src={product.imgUrl} className="ui avatar image" />
                 <div className="content">
                   {console.log('this is itemlist', this.props.userCart[elem])}
-                  <h3>Quantity: {this.props.userCart[elem]}</h3>
+                  <form>
+                    {/* <input type = 'number' onChange={}/> */}
+                    <h3>Quantity: {this.props.userCart[elem]}</h3>
+                  </form>
                   <div className="header">
                     <Link to={`/products/${elem}`}>
                       <li>{product.name}</li>
