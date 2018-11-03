@@ -3,6 +3,7 @@ import Checkout from './CheckoutForm'
 import axios from 'axios'
 import { connect } from 'react-redux'
 import { getCartFromServer } from '../store'
+import MyStoreCheckout from './checkoutForm/MyStoreCheckout'
 const subTotal = 300.01
 
 const total = 300 * 1.06
@@ -42,7 +43,6 @@ class CheckoutPage extends Component {
       shippingCity: this.state.shippingInfo.shippingCity,
       shippingState: this.state.shippingInfo.shippingState,
       shippingZipCode: this.state.shippingInfo.shippingZipCode,
-      userId: this.props.userId,
       status: 'created',
       subTotal,
       total,
@@ -50,7 +50,11 @@ class CheckoutPage extends Component {
     }
     console.log(orderInfo)
     try {
-      const { data } = await axios.post('/api/orders', orderInfo)
+      const { data } = await axios.put(
+        `/api/orders/${this.props.userId}`,
+        orderInfo
+      )
+      console.log(data)
       this.setState({ ...this.state, isCheckoutStarted: true })
     } catch (err) {
       console.log(err)
@@ -125,10 +129,11 @@ class CheckoutPage extends Component {
               value={shippingZipCode}
             />
           </label>
-          <button className="checkout-botton" type="submit">
-            Checkout
-          </button>
+          <button type="submit">Confirm the Order</button>
         </form>
+        <div className="testdiv">
+          {isCheckoutStarted && <MyStoreCheckout />}
+        </div>
       </div>
     )
   }
