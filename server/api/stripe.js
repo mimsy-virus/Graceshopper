@@ -14,14 +14,14 @@ router.post('/:id', async (req, res, next) => {
         status: 'created'
       }
     })
-
+    console.log('!!!!!!!', req.body.token)
     if (!order) return res.status(404).send('Not found')
 
     const charge = await stripe.charges.create({
       amount: `${order.total}`,
       currency: 'usd',
       description: 'Example charge',
-      source: req.body.stripeToken
+      source: req.body.token
     })
 
     if (!charge) return res.status(404).send('Not found')

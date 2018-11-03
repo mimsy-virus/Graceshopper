@@ -1,37 +1,20 @@
 import React from 'react'
 import { CardElement, injectStripe } from 'react-stripe-elements'
-import './CheckoutForm'
-const createOptions = (fontSize, padding) => {
-  return {
-    style: {
-      base: {
-        fontSize: '15px',
-        color: '#424770',
-        letterSpacing: '0.025em',
-        fontFamily: 'Source Code Pro, monospace',
-        '::placeholder': {
-          color: '#aab7c4'
-        },
-        padding: '1rem'
-      },
-      invalid: {
-        color: '#9e2146'
-      }
-    }
-  }
-}
-
+import axios from 'axios'
+const userId = 3
 class CheckoutForm extends React.Component {
-  handleSubmit = ev => {
-    ev.preventDefault()
-    if (this.props.stripe) {
-      this.props.stripe
-        .createToken()
-        .then(payload => console.log('[token]', payload))
-    } else {
-      console.log("Stripe.js hasn't loaded yet.")
+  handleSubmit = async ev => {
+    try {
+      let { token } = await this.props.stripe.createToken({
+        name: 'Jenny Rosen'
+      })
+      console.log(token)
+      let response = await axios.post(`/api/stripe/${userId}`, token)
+    } catch (err) {
+      console.log(err)
     }
   }
+
   render() {
     return (
       <div>
@@ -39,7 +22,9 @@ class CheckoutForm extends React.Component {
           Card info
           <CardElement />
         </label>
-        <button type="submit">hi</button>
+        <button onClick={this.handleSubmit} type="submit">
+          Pay
+        </button>
       </div>
     )
   }
