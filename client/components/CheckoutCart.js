@@ -11,16 +11,9 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 class CheckoutCart extends React.Component {
-<<<<<<< HEAD
   async componentDidMount() {
     await this.props.getCurrentProduct()
-    console.log('user id:', this.props.userId)
-    await this.props.getCartFromServer(this.props.userId)
-=======
-  componentDidMount() {
-    this.props.getCurrentProduct()
     this.props.getCartFromServer(this.props.userId)
->>>>>>> master
   }
 
   handleSubmit(event) {
@@ -65,8 +58,10 @@ class CheckoutCart extends React.Component {
                 <div className="content">
                   {console.log('this is itemlist', this.props.userCart[elem])}
                   <form>
+                    <label>Quantity:</label>
+                    <input placeholder={this.props.userCart[elem]} />
                     {/* <input type = 'number' onChange={}/> */}
-                    <h3>Quantity: {this.props.userCart[elem]}</h3>
+                    {/* <h3>Quantity: {this.props.userCart[elem]}</h3> */}
                     <h2>
                       price:
                       {curPrice}
