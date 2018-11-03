@@ -11,6 +11,7 @@ import SingleProduct from './components/singleProduct'
 import Home from './components/Home'
 import Cart from './components/CheckoutCart'
 import CheckoutPage from './components/CheckoutPage'
+import OrderCompleted from './components/checkoutForm/OrderCompletedPage'
 
 /**
  * COMPONENT
@@ -39,6 +40,7 @@ class Routes extends Component {
             <Route exact path="/home" component={UserHome} />
             <Route exact path="/" component={UserHome} />
             <Route exact path="/checkout" component={CheckoutPage} />
+            <Route exact path="/ordercompleted" component={OrderCompleted} />
           </Switch>
         )}
         {!isLoggedIn && (
