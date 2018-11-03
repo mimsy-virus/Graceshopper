@@ -1,15 +1,14 @@
 import React from 'react'
 import { CardElement, injectStripe } from 'react-stripe-elements'
 import axios from 'axios'
-const userId = 3
+import { connect } from 'react-redux'
 class CheckoutForm extends React.Component {
   handleSubmit = async ev => {
     try {
-      let { token } = await this.props.stripe.createToken({
-        name: 'Jenny Rosen'
-      })
+      console.log(this.props.userId)
+      let { token } = await this.props.stripe.createToken()
       console.log(token)
-      let response = await axios.post(`/api/stripe/${userId}`, token)
+      let response = await axios.post(`/api/stripe/${this.props.userId}`, token)
     } catch (err) {
       console.log(err)
     }
@@ -29,4 +28,9 @@ class CheckoutForm extends React.Component {
     )
   }
 }
-export default injectStripe(CheckoutForm)
+
+const mapStateToProps = state => ({
+  userId: state.user.id
+})
+const connectedCheckoutForm = connect(mapStateToProps)(CheckoutForm)
+export default injectStripe(connectedCheckoutForm)
