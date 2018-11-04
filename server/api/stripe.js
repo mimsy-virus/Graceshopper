@@ -14,31 +14,19 @@ router.post('/:id', async (req, res, next) => {
         status: 'created'
       }
     })
-    console.log('======', req.body)
     if (!order) return res.status(404).send('Not found')
-    console.log('Working?????')
+
     let { status } = await stripe.charges.create({
       amount: `${order.total * 100}`,
       currency: 'usd',
       description: 'An example charge',
       source: req.body.id
     })
-
-    console.log('!!!!!!' + status)
-    //if (!charge) return res.status(404).send('Not found')
-    const processingOrder = await Order.update(
-      {
-        status: 'processing'
-      },
-      {
-        where: {
-          userId: req.params.id,
-          status: 'created'
-        }
-      }
-    )
-
-    if (!processingOrder) return res.status(404).send('Not found')
+    if (status === 'succeeded') {
+      await order.update({
+        status: 'completed'
+      })
+    }
     res.json({ status })
   } catch (err) {
     next(err)
