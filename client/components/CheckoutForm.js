@@ -1,6 +1,7 @@
 import React from 'react'
+import axios from 'axios'
 
-class Checkout extends React.Component {
+export default class CheckoutForm extends React.Component {
   render() {
     return (
       <form action={`/api/stripe/${this.props.userId}`} method="POST">

@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const stripe = require('stripe')('sk_test_omsMneoAVGSlcUDdQqjqHpSc')
+const stripe = require('stripe')('sk_test_ZGEpF0zpWch6FYLWY3xYMNGA')
 const { Order } = require('../db/models')
 module.exports = router
 
@@ -14,17 +14,18 @@ router.post('/:id', async (req, res, next) => {
         status: 'created'
       }
     })
-
+    console.log('======', req.body)
     if (!order) return res.status(404).send('Not found')
-
-    const charge = await stripe.charges.create({
-      amount: `${order.total}`,
+    console.log('Working?????')
+    let { status } = await stripe.charges.create({
+      amount: `${order.total * 100}`,
       currency: 'usd',
-      description: 'Example charge',
-      source: req.body.stripeToken
+      description: 'An example charge',
+      source: req.body.id
     })
 
-    if (!charge) return res.status(404).send('Not found')
+    console.log('!!!!!!' + status)
+    //if (!charge) return res.status(404).send('Not found')
     const processingOrder = await Order.update(
       {
         status: 'processing'
@@ -38,6 +39,7 @@ router.post('/:id', async (req, res, next) => {
     )
 
     if (!processingOrder) return res.status(404).send('Not found')
+    res.json({ status })
   } catch (err) {
     next(err)
   }

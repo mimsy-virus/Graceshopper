@@ -11,14 +11,12 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 class CheckoutCart extends React.Component {
-
   async componentDidMount() {
     await this.props.getCurrentProduct()
     await this.props.getCartFromServer(this.props.userId)
+  }
 
-  
-
-  handleSubmit(event) {
+  handleSubmit = event => {
     event.preventDefault()
     this.props.removeItemFromServer(this.props.userId, event.target.value)
   }
@@ -58,9 +56,7 @@ class CheckoutCart extends React.Component {
                 </div>
                 <img src={product.imgUrl} className="product-img" />
                 <div className="content">
-                  {console.log('this is itemlist', this.props.userCart[elem])}
                   <form>
-                    {/* <input type = 'number' onChange={}/> */}
                     <h3>Quantity: {this.props.userCart[elem]}</h3>
                     <h2>
                       price:
