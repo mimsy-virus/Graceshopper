@@ -11,23 +11,26 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 class CheckoutCart extends React.Component {
-<<<<<<< HEAD
   async componentDidMount() {
     await this.props.getCurrentProduct()
     this.props.getCartFromServer(this.props.userId)
   }
-=======
 
-  async componentDidMount() {
-    await this.props.getCurrentProduct()
-    await this.props.getCartFromServer(this.props.userId)
-
-  
->>>>>>> master
-
-  handleSubmit(event) {
+  async handleRemove(event) {
     event.preventDefault()
-    this.props.removeItemFromServer(this.props.userId, event.target.value)
+    await this.props.removeItemFromServer(this.props.userId, event.target.value)
+    this.componentDidMount()
+  }
+  async handleUpdate(event) {
+    event.preventDefault()
+    console.log('THIS IS EVENT', event.target.name)
+    const item = Number(event.target.value)
+    await this.props.updateItemToServer(this.props.userId, { 1: item })
+  }
+
+  async handleClear() {
+    event.preventDefault()
+    await this.props.clearCartFromServer(this.props.userId)
   }
 
   render() {
@@ -43,6 +46,9 @@ class CheckoutCart extends React.Component {
       let curPrice = 0
       return (
         <div role="list" className="ui divided middle aligned list">
+          <button type="button" onClick={this.handleClear.bind(this)}>
+            CLEAR CART
+          </button>
           {Object.keys(itemList).map(elem => {
             const product = productList.find(
               product => product.id === Number(elem)
@@ -58,7 +64,8 @@ class CheckoutCart extends React.Component {
                     type="submit"
                     role="button"
                     value={elem}
-                    onClick={this.handleSubmit.bind(this)}
+                    name="delete"
+                    onClick={this.handleRemove.bind(this)}
                   >
                     X
                   </button>
@@ -68,7 +75,13 @@ class CheckoutCart extends React.Component {
                   {console.log('this is itemlist', this.props.userCart[elem])}
                   <form>
                     <label>Quantity:</label>
-                    <input placeholder={this.props.userCart[elem]} />
+                    <input
+                      value={elem}
+                      name="update"
+                      onChange={this.handleUpdate.bind(this)}
+                      placeholder={this.props.userCart[elem]}
+                    />
+
                     {/* <input type = 'number' onChange={}/> */}
                     {/* <h3>Quantity: {this.props.userCart[elem]}</h3> */}
                     <h2>
