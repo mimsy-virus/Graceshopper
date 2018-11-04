@@ -79,10 +79,9 @@ class CheckoutCart extends React.Component {
                 <img src={product.imgUrl} className="product-img" />
                 <div className="content">
                   <form>
-<<<<<<< HEAD
                     <label>Quantity:</label>
                     <input
-                      value={elem}
+                      value={this.props.userCart[elem]}
                       name="update"
                       onChange={this.handleUpdate.bind(this)}
                       placeholder={this.props.userCart[elem]}
@@ -90,9 +89,6 @@ class CheckoutCart extends React.Component {
 
                     {/* <input type = 'number' onChange={}/> */}
                     {/* <h3>Quantity: {this.props.userCart[elem]}</h3> */}
-=======
-                    <h3>Quantity: {this.props.userCart[elem]}</h3>
->>>>>>> master
                     <h2>
                       price:
                       {curPrice}
