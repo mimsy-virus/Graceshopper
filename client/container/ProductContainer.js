@@ -6,7 +6,7 @@ import ProductsList from '../components/ProductsList'
 import FilterMenu from '../components/FilterMenu'
 import Search from '../components/Search'
 import { getCurrentProduct, addItemToServer } from '../store'
-import SingleProduct from '../components/singleProduct'
+import SingleProduct from '../components/SingleProduct'
 
 class ProductsContainer extends Component {
   constructor(props) {
