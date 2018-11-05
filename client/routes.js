@@ -9,7 +9,7 @@ import { me } from './store'
 import ProductContainer from './container/ProductContainer'
 import SingleProduct from './components/singleProduct'
 import Home from './components/Home'
-import Cart from './components/CheckoutCart'
+import Cart from './components/Cart/Cart'
 import CheckoutPage from './components/CheckoutPage'
 import OrderCompleted from './components/checkoutForm/OrderCompletedPage'
 

@@ -65,6 +65,7 @@ router.post('/:id', async (req, res, next) => {
 })
 
 router.put('/:id', async (req, res, next) => {
+  console.log(req.body)
   try {
     const order = await Order.findOne({
       where: {

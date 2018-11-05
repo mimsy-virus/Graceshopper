@@ -15,35 +15,19 @@ class CheckoutCart extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      item: {}
+      item: {},
+      subtotal: 0
     }
   }
-
   async componentDidMount() {
+    // console.log('state in mount', this.state)
     await this.props.getCurrentProduct()
     this.setState({ item: this.props.getCartFromServer(this.props.userId) })
   }
 
-  async handleRemove(event) {
-    event.preventDefault()
-    await this.props.removeItemFromServer(this.props.userId, event.target.value)
-    this.componentDidMount()
-  }
-  async handleUpdate(event) {
-    event.preventDefault()
-    console.log('THIS IS EVENT', event.target.name)
-    const item = Number(event.target.value)
-    await this.props.updateItemToServer(this.props.userId, { 1: item })
-    this.componentDidMount()
-  }
-
-  async handleClear() {
-    event.preventDefault()
-    await this.props.clearCartFromServer(this.props.userId)
-  }
-
   render() {
-    // console.log('this is props:', this.props)
+    // console.log('STATE', this.state)
+    let subtotal = 0
     if (
       this.props.userId &&
       Object.keys(this.props.userCart).length > 0 &&
@@ -51,8 +35,6 @@ class CheckoutCart extends React.Component {
     ) {
       const itemList = this.props.userCart
       const productList = this.props.productList
-      let subtotal = 0
-      let curPrice = 0
       return (
         <div role="list" className="ui divided middle aligned list">
           <button type="button" onClick={this.handleClear.bind(this)}>
@@ -62,17 +44,46 @@ class CheckoutCart extends React.Component {
             const product = productList.find(
               product => product.id === Number(elem)
             )
-            curPrice = Number(product.price) * Number(this.props.userCart[elem])
-            subtotal += curPrice
+            // curPrice = Number(product.price) * Number(this.props.userCart[elem])
+            subtotal += Number(product.price) * Number(itemList[elem])
 
-            return <ItemList />
+            return (
+              <ItemList
+                key={elem}
+                elem={elem}
+                product={product}
+                handleRemove={this.handleRemove.bind(this)}
+                handleUpdate={this.handleUpdate.bind(this)}
+                quantity={itemList[elem]}
+                // curPrice={this.state.curPrice}
+              />
+            )
           })}
-          <h3>SUBTOTAL : {Math.round(subtotal * 100) / 100}</h3>
+          <h3>SUBTOTAL : ${subtotal}</h3>
 
           <Link to="/checkout">Click to Checkout</Link>
         </div>
       )
     } else return <h1>Cart is Empty!</h1>
+  }
+
+  async handleRemove(event) {
+    event.preventDefault()
+    await this.props.removeItemFromServer(this.props.userId, event.target.value)
+    this.componentDidMount()
+  }
+  async handleUpdate(event) {
+    event.preventDefault()
+    const item = Number(event.target.value)
+    await this.props.updateItemToServer(this.props.userId, {
+      [event.target.name]: item
+    })
+    this.componentDidMount()
+  }
+
+  async handleClear() {
+    event.preventDefault()
+    await this.props.clearCartFromServer(this.props.userId)
   }
 }
 
