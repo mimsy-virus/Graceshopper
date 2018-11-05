@@ -2,13 +2,13 @@ const router = require('express').Router()
 const { Order } = require('../db/models')
 const { Product } = require('../db/models')
 const { OrderProduct } = require('../db/models')
-const { isAutheticated } = require('./apiProtection/isAuthenticated')
+const { isAuthenticated } = require('./apiProtection/isAuthenticated')
 module.exports = router
 
 router.get('/:id', async (req, res, next) => {
   try {
     const userId = req.params.id
-    if (isAutheticated(req, userId)) {
+    if (isAuthenticated(req, userId)) {
       const order = await Order.findOne({
         where: {
           userId: req.params.id,
@@ -42,7 +42,7 @@ router.get('/:id', async (req, res, next) => {
 router.post('/:id', async (req, res, next) => {
   try {
     const userId = req.params.id
-    if (isAutheticated(req, userId)) {
+    if (isAuthenticated(req, userId)) {
       let order = await Order.findOne({
         where: {
           userId: req.params.id,
@@ -79,7 +79,7 @@ router.put('/:id', async (req, res, next) => {
   console.log(req.body)
   try {
     const userId = req.params.id
-    if (isAutheticated(req, userId)) {
+    if (isAuthenticated(req, userId)) {
       const order = await Order.findOne({
         where: {
           userId: req.params.id,
@@ -120,7 +120,7 @@ router.put('/:id', async (req, res, next) => {
 router.delete('/clear/delete/:id', async (req, res, next) => {
   try {
     const userId = req.params.id
-    if (isAutheticated(req, userId)) {
+    if (isAuthenticated(req, userId)) {
       const order = await Order.findOne({
         where: {
           userId: req.params.id,
@@ -149,7 +149,7 @@ router.delete('/clear/delete/:id', async (req, res, next) => {
 router.delete('/:id/:itemId', async (req, res, next) => {
   try {
     const userId = req.params.id
-    if (isAutheticated(req, userId)) {
+    if (isAuthenticated(req, userId)) {
       const order = await Order.findOne({
         where: {
           userId: req.params.id,
