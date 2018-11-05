@@ -57,7 +57,7 @@ export const updateAProduct = (product, id) => async dispatch => {
   }
 }
 
-export const RemoveAProduct = id => async dispatch => {
+export const removeAProduct = id => async dispatch => {
   try {
     const { data } = await axios.delete(`/api/products/${id}`)
     dispatch(removeProduct(data, id))

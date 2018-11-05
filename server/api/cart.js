@@ -128,7 +128,6 @@ router.delete('/clear/delete/:id', async (req, res, next) => {
 })
 
 router.delete('/:id/:itemId', async (req, res, next) => {
-  console.log('clear item')
   try {
     const order = await Order.findOne({
       where: {
