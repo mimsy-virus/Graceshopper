@@ -4,19 +4,22 @@ import { withRouter, Route, Switch } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { Login, Signup } from './components'
 import UserHome from './components/user-home'
-import newProductForm from './components/newProductForm'
+import newProductForm from './components/NewProductForm'
 import { me } from './store'
 import ProductContainer from './container/ProductContainer'
-import SingleProduct from './components/singleProduct'
+import SingleProduct from './components/SingleProduct'
 import Home from './components/Home'
 import Cart from './components/CheckoutCart'
 import CheckoutPage from './components/CheckoutPage'
+import OrderCompleted from './components/checkoutForm/OrderCompletedPage'
+
 /**
  * COMPONENT
  */
 class Routes extends Component {
-  componentDidMount() {
-    this.props.loadInitialData()
+  async componentDidMount() {
+    await this.props.loadInitialData()
+    console.log('user id in routes:', this.props.userId)
   }
 
   render() {
@@ -37,6 +40,7 @@ class Routes extends Component {
             <Route exact path="/home" component={UserHome} />
             <Route exact path="/" component={UserHome} />
             <Route exact path="/checkout" component={CheckoutPage} />
+            <Route exact path="/ordercompleted" component={OrderCompleted} />
           </Switch>
         )}
         {!isLoggedIn && (
@@ -59,14 +63,15 @@ const mapState = state => {
   return {
     // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
     // Otherwise, state.user will be an empty object, and state.user.id will be falsey
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!state.user.id,
+    userId: state.user.id
   }
 }
 
 const mapDispatch = dispatch => {
   return {
-    loadInitialData() {
-      dispatch(me())
+    async loadInitialData() {
+      await dispatch(me())
     }
   }
 }

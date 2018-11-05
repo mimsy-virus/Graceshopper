@@ -1,5 +1,6 @@
 const router = require('express').Router()
 const { Product } = require('../db/models')
+const { ifIsAdmin } = require('./apiprotection')
 module.exports = router
 
 router.get('/', async (req, res, next) => {
@@ -33,7 +34,7 @@ router.get('/category/:category', async (req, res, next) => {
   }
 })
 
-router.post('/', async (req, res, next) => {
+router.post('/', ifIsAdmin, async (req, res, next) => {
   try {
     const product = await Product.create(req.body)
     res.json(product)
@@ -42,7 +43,7 @@ router.post('/', async (req, res, next) => {
   }
 })
 
-router.put('/:id', async (req, res, next) => {
+router.put('/:id', ifIsAdmin, async (req, res, next) => {
   try {
     const product = await Product.findById(req.params.id)
     await product.update(req.body)
@@ -52,7 +53,7 @@ router.put('/:id', async (req, res, next) => {
   }
 })
 
-router.delete('/:id', async (req, res, next) => {
+router.delete('/:id', ifIsAdmin, async (req, res, next) => {
   try {
     const product = await Product.findById(req.params.id)
     await product.destroy()

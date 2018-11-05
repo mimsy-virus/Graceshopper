@@ -73,7 +73,7 @@ router.put('/:id', async (req, res, next) => {
       }
     })
     if (!order) return res.status(404).send('Not found')
-
+    // console.log('this is objectkeys', req.body)
     const cartData = await OrderProduct.update(
       {
         quantity: Object.values(req.body)[0]
@@ -81,7 +81,7 @@ router.put('/:id', async (req, res, next) => {
       {
         where: {
           orderId: order.id,
-          productId: Object.keys(req.body)[0]
+          productId: Number(Object.keys(req.body)[0])
         }
       }
     )
@@ -95,7 +95,7 @@ router.put('/:id', async (req, res, next) => {
     })
     if (!itemData) return res.status(404).send('Not found')
 
-    console.log(itemData)
+    // console.log(itemData)
     res.json({ [itemData.productId]: itemData.quantity })
   } catch (err) {
     next(err)
@@ -128,7 +128,6 @@ router.delete('/clear/delete/:id', async (req, res, next) => {
 })
 
 router.delete('/:id/:itemId', async (req, res, next) => {
-  console.log('clear item')
   try {
     const order = await Order.findOne({
       where: {
