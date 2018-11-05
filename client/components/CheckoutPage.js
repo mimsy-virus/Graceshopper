@@ -43,7 +43,7 @@ class CheckoutPage extends Component {
       shippingState: this.state.shippingInfo.shippingState,
       shippingZipCode: this.state.shippingInfo.shippingZipCode,
       status: 'created',
-      subTotal,
+      subTotal: this.props.subTotal,
       total,
       taxRate: 0.06
     }
