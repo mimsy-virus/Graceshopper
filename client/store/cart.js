@@ -64,7 +64,7 @@ export const updateItemToServer = (userId, item) => async dispatch => {
 export const removeItemFromServer = (userId, itemId) => async dispatch => {
   try {
     const { data } = await axios.delete(`api/cart/${userId}/${itemId}`)
-    dispatch(removeItemAction(Object.keys(data)[0]))
+    dispatch(removeItemAction(itemId))
   } catch (err) {
     console.log(err)
   }
@@ -96,9 +96,10 @@ export default function(state = defaultCart, action) {
       }
 
     case REMOVE_ITEM:
-      delete state.userCartCart[action.itemId]
+      let newCart = { ...state.userCart }
+      delete newCart[action.itemId]
       return {
-        userCart: state.userCart
+        userCart: newCart
       }
 
     case CLEAR_CART:
