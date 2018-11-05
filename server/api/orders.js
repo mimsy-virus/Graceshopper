@@ -1,6 +1,6 @@
 const router = require('express').Router()
 const { Order } = require('../db/models')
-const { isAutheticated } = require('./apiProtection/isAuthenticated')
+const { isAuthenticated } = require('./apiProtection/isAuthenticated')
 module.exports = router
 
 router.get('/', async (req, res, next) => {
@@ -14,7 +14,7 @@ router.get('/', async (req, res, next) => {
 router.get('/:id', async (req, res, next) => {
   try {
     const userId = req.params.id
-    if (isAutheticated(req, userId)) {
+    if (isAuthenticated(req, userId)) {
       const order = await Order.findAll({
         where: {
           userId
@@ -33,7 +33,7 @@ router.get('/:id', async (req, res, next) => {
 router.put('/:id', async (req, res, next) => {
   try {
     const userId = req.params.id
-    if (isAutheticated(req, userId)) {
+    if (isAuthenticated(req, userId)) {
       const order = await Order.findOne({
         where: {
           userId: req.params.id,
