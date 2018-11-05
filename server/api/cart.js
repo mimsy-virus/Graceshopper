@@ -95,7 +95,6 @@ router.put('/:id', async (req, res, next) => {
     })
     if (!itemData) return res.status(404).send('Not found')
 
-    // console.log(itemData)
     res.json({ [itemData.productId]: itemData.quantity })
   } catch (err) {
     next(err)
@@ -103,7 +102,6 @@ router.put('/:id', async (req, res, next) => {
 })
 
 router.delete('/clear/delete/:id', async (req, res, next) => {
-  console.log('clear cart')
   try {
     const order = await Order.findOne({
       where: {
