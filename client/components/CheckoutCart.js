@@ -9,6 +9,7 @@ import {
 } from '../store'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
+import CheckoutForm from './CheckoutForm'
 
 class CheckoutCart extends React.Component {
   componentDidMount() {
@@ -29,35 +30,38 @@ class CheckoutCart extends React.Component {
       const itemList = this.props.userCart
       const productList = this.props.productList
       return (
-        <div role="list" className="ui divided middle aligned list">
-          {Object.keys(itemList).map(elem => {
-            const product = productList.find(
-              product => product.id === Number(elem)
-            )
-            return (
-              <div role="listitem" className="item" key={elem}>
-                <div className="right floated content">
-                  <button
-                    className="ui negative button"
-                    type="submit"
-                    role="button"
-                    value={elem}
-                    onClick={this.handleSubmit.bind(this)}
-                  >
-                    X
-                  </button>
-                </div>
-                <img src={product.imgUrl} className="ui avatar image" />
-                <div className="content">
-                  <div className="header">
-                    <Link to={`/products/${elem}`}>
-                      <li>{product.name}</li>
-                    </Link>
+        <div>
+          <div role="list" className="ui divided middle aligned list">
+            {Object.keys(itemList).map(elem => {
+              const product = productList.find(
+                product => product.id === Number(elem)
+              )
+              return (
+                <div role="listitem" className="item" key={elem}>
+                  <div className="right floated content">
+                    <button
+                      className="ui negative button"
+                      type="submit"
+                      role="button"
+                      value={elem}
+                      onClick={this.handleSubmit.bind(this)}
+                    >
+                      X
+                    </button>
+                  </div>
+                  <img src={product.imgUrl} className="ui avatar image" />
+                  <div className="content">
+                    <div className="header">
+                      <Link to={`/products/${elem}`}>
+                        <li>{product.name}</li>
+                      </Link>
+                    </div>
                   </div>
                 </div>
-              </div>
-            )
-          })}
+              )
+            })}
+          </div>
+          <CheckoutForm userId={this.props.userId} />
         </div>
       )
     } else return <h1>Cart is Empty!</h1>

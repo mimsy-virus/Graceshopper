@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Checkout from './CheckoutForm'
 import axios from 'axios'
+import CheckoutForm from './CheckoutForm'
 
 class CheckoutPage extends Component {
   constructor(props) {

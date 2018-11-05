@@ -1,6 +1,6 @@
 import React from 'react'
 
-class Checkout extends React.Component {
+export default class CheckoutForm extends React.Component {
   render() {
     return (
       <form action={`/api/stripe/${this.props.userId}`} method="POST">
@@ -8,7 +8,7 @@ class Checkout extends React.Component {
           src="https://checkout.stripe.com/checkout.js"
           className="stripe-button"
           data-key="pk_test_tJzNJ8TpR8cVSF11Fl7iGlpl"
-          data-amount={`${this.props.total}`}
+          data-amount="999"
           data-name="Demo Site"
           data-description="Example charge"
           data-image="https://stripe.com/img/documentation/checkout/marketplace.png"

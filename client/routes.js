@@ -11,7 +11,6 @@ import SingleProduct from './components/singleProduct'
 import Home from './components/Home'
 import Cart from './components/CheckoutCart'
 import CheckoutPage from './components/CheckoutPage'
-
 /**
  * COMPONENT
  */
