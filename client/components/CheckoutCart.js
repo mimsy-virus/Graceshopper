@@ -11,12 +11,6 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 class CheckoutCart extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      items: {}
-    }
-  }
   async componentDidMount() {
     await this.props.getCurrentProduct()
     this.props.getCartFromServer(this.props.userId)
