@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { addNewProduct } from '../store/products'
-import AdminForm from './AdminForm'
+import AdminForm from './adminForm'
 
 class NewProductForm extends Component {
   constructor(props) {
