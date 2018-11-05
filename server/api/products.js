@@ -1,6 +1,6 @@
 const router = require('express').Router()
 const { Product } = require('../db/models')
-const { ifIsAdmin } = require('./apiprotection')
+const { ifIsAdmin } = require('./apiProtection/isAdmin')
 module.exports = router
 
 router.get('/', async (req, res, next) => {
