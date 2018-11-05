@@ -69,23 +69,20 @@ describe('thunk creators', () => {
 
   describe('removeItemFromServer', () => {
     it('removes an item from cart and DELETE from server', async () => {
-      const specialStore = mockStore({ userCart: { 1: 2, 2: 1, 3: 5 } })
       mockAxios.onDelete('/api/cart/1/2').replyOnce(200)
-      await specialStore.dispatch(removeItemFromServer(1, 2))
-      const actions = specialStore.getActions()
+      await store.dispatch(removeItemFromServer(1, 2))
+      const actions = store.getActions()
       expect(actions[0].type).to.be.equal('REMOVE_ITEM')
-      expect(specialStore.getState()).to.be.deep.equal({ 1: 2, 3: 5 })
+      expect(actions[0].itemId).to.be.equal(2)
     })
   })
 
-  xdescribe('clearCartFromServer', () => {
+  describe('clearCartFromServer', () => {
     it('removes all items from cart and DELETE from server', async () => {
-      const specialStore = mockStore({ userCart: { 1: 2, 2: 1, 3: 5 } })
-      mockAxios.onGet('/api/cart/clear/delete/1').replyOnce(200)
-      await specialStore.dispatch(clearCartFromServer(1))
-      const actions = specialStore.getActions()
+      mockAxios.onDelete('/api/cart/clear/delete/1').replyOnce(200)
+      await store.dispatch(clearCartFromServer(1))
+      const actions = store.getActions()
       expect(actions[0].type).to.be.equal('CLEAR_CART')
-      expect(specialStore.getState().userCart).to.be.deep.equal({})
     })
   })
 })

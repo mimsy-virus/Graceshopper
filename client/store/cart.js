@@ -96,9 +96,10 @@ export default function(state = defaultCart, action) {
       }
 
     case REMOVE_ITEM:
-      delete state.userCart[action.itemId]
+      let newCart = { ...state.userCart }
+      delete newCart[action.itemId]
       return {
-        userCart: state.userCart
+        userCart: newCart
       }
 
     case CLEAR_CART:
