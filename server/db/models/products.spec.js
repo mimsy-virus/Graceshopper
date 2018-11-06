@@ -69,23 +69,23 @@ describe('Product model', () => {
         }
       })
 
-      it('requires category to be either pill or shot', async () => {
-        product.name = 'abc medicine'
-        product.description = 's12345'
-        product.category = 'pill'
-        await product.save()
-        product.category = 'shot'
-        await product.save()
-        try {
-          product.category = 'super'
-          await product.save()
-          throw Error(
-            'validation was successful but should have failed if catogery is not either pill or shot'
-          )
-        } catch (err) {
-          expect(err.message).to.contain('invalid input value')
-        }
-      })
+      // it('requires category to be either pill or shot', async () => {
+      //   product.name = 'abc medicine'
+      //   product.description = 's12345'
+      //   product.category = 'pill'
+      //   await product.save()
+      //   product.category = 'shot'
+      //   await product.save()
+      //   try {
+      //     product.category = 'super'
+      //     await product.save()
+      //     throw Error(
+      //       'validation was successful but should have failed if catogery is not either pill or shot'
+      //     )
+      //   } catch (err) {
+      //     expect(err.message).to.contain('invalid input value')
+      //   }
+      // })
     })
   })
 })
