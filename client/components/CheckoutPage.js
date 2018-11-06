@@ -33,7 +33,6 @@ class CheckoutPage extends Component {
         [evt.target.name]: evt.target.value
       }
     })
-    // console.log(this.state)
   }
 
   handleSubmit = async evt => {
@@ -48,6 +47,7 @@ class CheckoutPage extends Component {
       total: this.props.subtotal * 1.06,
       taxRate: 0.06
     }
+    console.log(orderInfo)
     try {
       const { data } = await axios.put(
         `/api/orders/${this.props.userId}`,
