@@ -18,12 +18,7 @@ describe('Order model', () => {
       }
     })
 
-    it('requires status to be either pill or shot', async () => {
-      //     'cart',
-      //   'created',
-      //   'processing',
-      //   'cancelled',
-      //   'completed'
+    it('requires status to be cart,created, processing,cancelled or completed', async () => {
       order.status = 'cart'
       await order.save()
       order.status = 'created'
