@@ -72,7 +72,11 @@ class CheckoutCart extends React.Component {
           </div>
           <div className="item">
             <div className="right floated content">
-              <button type="button" href="/checkout">
+              <button
+                type="button"
+                href="/checkout"
+                onClick={() => this.updateSubtotal}
+              >
                 <Link to="/checkout">Click to Checkout</Link>
               </button>
             </div>
@@ -87,6 +91,8 @@ class CheckoutCart extends React.Component {
       )
     }
   }
+
+  updateSubtotal = () => {}
 
   async handleRemove(event) {
     event.preventDefault()
