@@ -11,9 +11,9 @@ const AuthForm = props => {
 
   return (
     <div className="ui placeholder segment">
-      {/* <header as="h2" color="black" textAlign="center">
-        Log-in to your account
-      </header> */}
+      <header as="h2" color="black" textAlign="center">
+        {displayName} to your account
+      </header>
       <div className="ui center aligned content" width="50 %">
         <div className="column">
           <form className="ui form" onSubmit={handleSubmit} name={name}>
