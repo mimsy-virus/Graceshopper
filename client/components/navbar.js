@@ -1,60 +1,63 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import { logout } from '../store'
 // import newProductForm from './newProductForm'
 
 const Navbar = ({ handleClick, isLoggedIn }) => (
-  <div>
-    <nav>
-      {isLoggedIn ? (
-        <div role="list" className="ui celled horizontal list">
-          <div role="listitem" className="item">
-            <Link to="/home">Home</Link>
-          </div>
-          <div role="listitem" className="item">
-            <Link to="/products">Products</Link>
-          </div>
-          <div role="listitem" className="item">
-            <Link to="/account">Account</Link>
-          </div>
-          <div role="listitem" className="item">
-            <a href="#" onClick={handleClick}>
+  <React.Fragment>
+    {isLoggedIn ? (
+      <React.Fragment>
+        <a className="item">
+          <NavLink to="/home">Home</NavLink>
+        </a>
+        <a className="item">
+          <NavLink to="/products">Products</NavLink>
+        </a>
+        <a className="item">
+          <NavLink to="/account">Account</NavLink>
+        </a>
+        <a className="item">
+          <NavLink to="/cart">Cart</NavLink>
+        </a>
+        <div className="right menu">
+          <div className="item">
+            <a className="ui button" href="#" onClick={handleClick}>
               Logout
             </a>
           </div>
-          {/* The navbar will show these links after you log in */}
-          <div role="listitem" className="item">
-            <Link to="/cart">Cart</Link>
-          </div>
-          {/* {isAdmin && <Link to="/newProductForm">new product</Link>} */}
         </div>
-      ) : (
-        <div>
-          {/* The navbar will show these links before you log in */}
-          <div role="list" className="ui celled horizontal list">
-            <div role="listitem" className="item">
-              <Link to="/home">Home</Link>
-            </div>
-            <div role="listitem" className="item">
-              <Link to="/products">Products</Link>
-            </div>
-            <div role="listitem" className="item">
-              <Link to="/login">Login</Link>
-            </div>
-            <div role="listitem" className="item">
-              <Link to="/signup">Sign Up</Link>
-            </div>
-            <div role="listitem" className="item">
-              <Link to="/cart">Cart</Link>
-            </div>
+      </React.Fragment>
+    ) : (
+      <React.Fragment>
+        <a className="item">
+          <NavLink to="/home">Home</NavLink>
+        </a>
+        <a className="item">
+          <NavLink to="/products">Products</NavLink>
+        </a>
+        <a className="item">
+          <NavLink to="/account">Account</NavLink>
+        </a>
+        <a className="item">
+          <NavLink to="/cart">Cart</NavLink>
+        </a>
+        <div className="right menu">
+          <div className="item">
+            <a className="ui button">
+              <NavLink to="/login">Login</NavLink>
+            </a>
+          </div>
+          <div className="item">
+            <a className="ui button">
+              <NavLink to="/signup">Sign Up</NavLink>
+            </a>
           </div>
         </div>
-      )}
-    </nav>
-    <hr />
-  </div>
+      </React.Fragment>
+    )}
+  </React.Fragment>
 )
 
 /**

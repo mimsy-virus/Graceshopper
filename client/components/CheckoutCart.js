@@ -34,7 +34,6 @@ class CheckoutCart extends React.Component {
   }
 
   render() {
-    // console.log('this is props:', this.props)
     if (
       this.props.userId &&
       Object.keys(this.props.userCart).length > 0 &&
