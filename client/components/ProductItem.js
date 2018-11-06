@@ -21,13 +21,14 @@ const ProductItem = props => {
         <p>category: {category}</p>
       </div>
       <h2>${price}</h2>
-      {props.isLoggedIn && (
+      {
         <div>
           <form>
             <label>Quantity:</label>
             <input type="number" onChange={handleChange} />
           </form>
           <button
+            disabled={!props.isLoggedIn}
             type="button"
             value={name}
             onClick={() => props.onClick({ [productId]: quantity })}
@@ -35,7 +36,7 @@ const ProductItem = props => {
             ADD TO CART
           </button>
         </div>
-      )}
+      }
     </div>
   )
 }

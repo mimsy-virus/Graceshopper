@@ -10,14 +10,17 @@ import {
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import ItemList from './ItemList'
-import CheckoutForm from '../checkoutForm/CheckoutForm'
+import CheckoutPage from '../CheckoutPage'
+import axios from 'axios'
 
 class CheckoutCart extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      item: {},
-      subtotal: 0
+      item: {
+        subtotal: 0
+      },
+      checkout: false
     }
   }
   async componentDidMount() {
@@ -62,12 +65,26 @@ class CheckoutCart extends React.Component {
           })}
           <h3>SUBTOTAL : ${subtotal}</h3>
 
-          <Link to="/checkout">Click to Checkout</Link>
+          <button type="submit" onClick={() => this.goToCheckout(subtotal)}>
+            Click to Checkout
+          </button>
+          {this.state.checkout && <CheckoutPage subtotal={subtotal} />}
         </div>
       )
     } else return <h1>Cart is Empty!</h1>
   }
 
+  goToCheckout = async subtotal => {
+    this.setState({ checkout: true })
+    try {
+      const { data } = await axios.put(`/api/orders/${this.props.userId}`, {
+        subTotal: subtotal
+      })
+    } catch (err) {
+      console.log(err)
+    }
+  }
+  // handlechanges
   async handleRemove(event) {
     event.preventDefault()
     await this.props.removeItemFromServer(this.props.userId, event.target.value)

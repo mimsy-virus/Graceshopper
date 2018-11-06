@@ -3,9 +3,6 @@ import axios from 'axios'
 import { connect } from 'react-redux'
 import { getCartFromServer } from '../store'
 import MyStoreCheckout from './checkoutForm/MyStoreCheckout'
-const subTotal = 300.01
-
-const total = 300 * 1.06
 class CheckoutPage extends Component {
   constructor(props) {
     super(props)
@@ -43,17 +40,17 @@ class CheckoutPage extends Component {
       shippingState: this.state.shippingInfo.shippingState,
       shippingZipCode: this.state.shippingInfo.shippingZipCode,
       status: 'created',
-      subTotal: this.props.subTotal,
-      total,
+      subTotal: this.props.subtotal,
+      total: this.props.subtotal * 1.06,
       taxRate: 0.06
     }
-    console.log(orderInfo)
+    // console.log(orderInfo)
     try {
       const { data } = await axios.put(
         `/api/orders/${this.props.userId}`,
         orderInfo
       )
-      console.log(data)
+      // console.log(data)
       this.setState({ ...this.state, isCheckoutStarted: true })
     } catch (err) {
       console.log(err)
@@ -61,6 +58,7 @@ class CheckoutPage extends Component {
   }
 
   render() {
+    console.log(this.props.userCart)
     const { shippingInfo, isCheckoutStarted } = this.state
     const {
       firstName,

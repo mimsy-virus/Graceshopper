@@ -19,7 +19,6 @@ import OrderCompleted from './components/checkoutForm/OrderCompletedPage'
 class Routes extends Component {
   async componentDidMount() {
     await this.props.loadInitialData()
-    console.log('user id in routes:', this.props.userId)
   }
 
   render() {
