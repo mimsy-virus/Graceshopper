@@ -9,9 +9,8 @@ export const UserHome = props => {
   const { email } = props
 
   return (
-    <div>
+    <div className="ui center aligned container">
       <h3>Welcome, {email}</h3>
-      {/* <ProductsContainer /> */}
     </div>
   )
 }
