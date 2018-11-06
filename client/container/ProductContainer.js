@@ -28,6 +28,13 @@ class ProductsContainer extends Component {
 
   handleClick = item => {
     this.props.addToCart(this.props.userId, item)
+    this.routeChange()
+  }
+
+  routeChange() {
+    // redirect to list of items after completed
+    let path = `/cart`
+    this.props.history.push(path)
   }
 
   render() {

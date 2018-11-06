@@ -1,7 +1,11 @@
 import React from 'react'
 
 const OrderCompleted = props => {
-  return <h2>Thanks for your order!</h2>
+  return (
+    <div className="ui center aligned content">
+      <h1>Thanks for your order!</h1>
+    </div>
+  )
 }
 
 export default OrderCompleted
