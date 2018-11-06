@@ -44,19 +44,19 @@ class ProductsContainer extends Component {
     return (
       !!this.props.productList.length && (
         <ProductsList title="Products">
-          <FilterMenu
-            {...this.state}
-            handleChange={this.handleChange.bind(this)}
-          />
-          {/* <Search /> */}
-          {this.props.productList.map(product => (
-            <ProductItem
-              key={product.id}
-              product={product}
-              isLoggedIn={this.props.isLoggedIn}
-              onClick={this.handleClick}
-            />
-          ))}
+          <FilterMenu handleChange={this.handleChange} {...this.state} />
+          <Search />
+          <div role="list" className="ui selection middle aligned list">
+            {this.props.productList.map(product => (
+              <ProductItem
+                key={product.id}
+                product={product}
+                isLoggedIn={this.props.isLoggedIn}
+                // onAddToCartClicked
+                onClick={this.handleClick}
+              />
+            ))}
+          </div>
         </ProductsList>
       )
     )

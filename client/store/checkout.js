@@ -16,7 +16,7 @@ const setTheSubTotal = subtotal => ({ type: SET_SUBTOTAL, subtotal })
 
 //thunk creator
 
-export const getSubtotal = (subtotal = async dispatch => {
+export const getSubtotal = subtotal => async dispatch => {
   try {
     const { data } = await axios.put(
       `/api/orders/${subtotal.userId}`,
@@ -26,7 +26,7 @@ export const getSubtotal = (subtotal = async dispatch => {
   } catch (err) {
     console.log(err)
   }
-})
+}
 
 export const setSubtotal = subtotal => async dispatch => {
   try {

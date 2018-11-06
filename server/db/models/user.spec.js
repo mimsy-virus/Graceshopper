@@ -1,18 +1,22 @@
 /* global describe beforeEach it */
 
-const {expect} = require('chai')
+const { expect } = require('chai')
 const db = require('../index')
 const User = db.model('user')
 
 describe('User model', () => {
   beforeEach(() => {
-    return db.sync({force: true})
+    return db.sync({ force: true })
   })
 
-  describe('instanceMethods', () => {
+  describe('Validations', () => {
+    let user
+    before(() => {
+      user = User.build()
+    })
+
     describe('correctPassword', () => {
       let cody
-
       beforeEach(async () => {
         cody = await User.create({
           email: 'cody@puppybook.com',
@@ -28,5 +32,32 @@ describe('User model', () => {
         expect(cody.correctPassword('bonez')).to.be.equal(false)
       })
     }) // end describe('correctPassword')
+    describe('Email validation', () => {
+      it('requires email to be a valid email address', async () => {
+        try {
+          user.email = 'notAEmail'
+          await user.validate()
+          throw Error(
+            'validation was successful but should have failed without valide `email`'
+          )
+        } catch (err) {
+          expect(err.message).to.contain('Validation isEmail on email failed')
+        }
+      })
+
+      //   it('requires email to be an unique', async () => {
+      //     try {
+      //       let codyCopy = await User.create({
+      //         email: 'cody@puppybook.com',
+      //         password: 'bones'
+      //       })
+      //       throw Error(
+      //         'validation was successful but should have failed if name is an empty string'
+      //       )
+      //     } catch (err) {
+      //       expect(err.message).to.contain('Validation isEmail on email failed')
+      //     }
+      //   })
+    })
   }) // end describe('instanceMethods')
 }) // end describe('User model')

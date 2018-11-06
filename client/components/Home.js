@@ -2,8 +2,6 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 const Home = props => {
-  console.log(props)
-  // console.log(isLoggedIn)
   if (props.isLoggedIn !== true) {
     return (
       <div>

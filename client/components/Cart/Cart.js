@@ -10,17 +10,26 @@ import {
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import ItemList from './ItemList'
+<<<<<<< HEAD
 import CheckoutPage from '../CheckoutPage'
 import axios from 'axios'
+=======
+import CheckoutForm from '../checkoutForm/CheckoutForm'
+import { setSubtotal } from '../../store/checkout'
+>>>>>>> master
 
 class CheckoutCart extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+<<<<<<< HEAD
       item: {
         subtotal: 0
       },
       checkout: false
+=======
+      item: {}
+>>>>>>> master
     }
   }
   async componentDidMount() {
@@ -40,40 +49,61 @@ class CheckoutCart extends React.Component {
       const itemList = this.props.userCart
       const productList = this.props.productList
       return (
-        <div role="list" className="ui divided middle aligned list">
-          <button type="button" onClick={this.handleClear.bind(this)}>
-            CLEAR CART
-          </button>
-          {Object.keys(itemList).map(elem => {
-            const product = productList.find(
-              product => product.id === Number(elem)
-            )
-            // curPrice = Number(product.price) * Number(this.props.userCart[elem])
-            subtotal += Number(product.price) * Number(itemList[elem])
-
-            return (
-              <ItemList
-                key={elem}
-                elem={elem}
-                product={product}
-                handleRemove={this.handleRemove.bind(this)}
-                handleUpdate={this.handleUpdate.bind(this)}
-                quantity={itemList[elem]}
-                // curPrice={this.state.curPrice}
-              />
-            )
-          })}
-          <h3>SUBTOTAL : ${subtotal}</h3>
-
-          <button type="submit" onClick={() => this.goToCheckout(subtotal)}>
-            Click to Checkout
-          </button>
-          {this.state.checkout && <CheckoutPage subtotal={subtotal} />}
+        <div role="list" className="ui middle aligned list">
+          <div className="item">
+            {Object.keys(itemList).map(elem => {
+              const product = productList.find(
+                product => product.id === Number(elem)
+              )
+              // curPrice = Number(product.price) * Number(this.props.userCart[elem])
+              subtotal += Number(product.price) * Number(itemList[elem])
+              return (
+                <ItemList
+                  key={elem}
+                  elem={elem}
+                  product={product}
+                  handleRemove={this.handleRemove.bind(this)}
+                  handleUpdate={this.handleUpdate.bind(this)}
+                  quantity={itemList[elem]}
+                  // curPrice={this.state.curPrice}
+                />
+              )
+            })}
+          </div>
+          <div className="item">
+            <div className="right floated content">
+              <button type="button" onClick={this.handleClear.bind(this)}>
+                CLEAR CART
+              </button>
+            </div>
+          </div>
+          <div className="item">
+            <div className="right floated content">
+              <h3>SUBTOTAL : ${subtotal}</h3>
+            </div>
+          </div>
+          <div className="item">
+            <div className="right floated content">
+              <button
+                type="button"
+                href="/checkout"
+                onClick={() => this.updateSubtotal}
+              >
+                <Link to="/checkout">Click to Checkout</Link>
+              </button>
+            </div>
+          </div>
         </div>
       )
-    } else return <h1>Cart is Empty!</h1>
+    } else {
+      return (
+        <div className="center aligned content">
+          <h1>Cart is Empty!</h1>
+        </div>
+      )
+    }
   }
-
+  //delete one
   goToCheckout = async subtotal => {
     this.setState({ checkout: true })
     try {
@@ -85,6 +115,8 @@ class CheckoutCart extends React.Component {
     }
   }
   // handlechanges
+  updateSubtotal = () => {}
+
   async handleRemove(event) {
     event.preventDefault()
     await this.props.removeItemFromServer(this.props.userId, event.target.value)
@@ -124,7 +156,9 @@ const mapDispatchToProps = dispatch => ({
 
   clearCartFromServer: userId => dispatch(clearCartFromServer(userId)),
 
-  getCurrentProduct: () => dispatch(getCurrentProduct())
+  getCurrentProduct: () => dispatch(getCurrentProduct()),
+
+  setSubTotal: subtotal => dispatch(setSubtotal(subtotal))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(CheckoutCart)
