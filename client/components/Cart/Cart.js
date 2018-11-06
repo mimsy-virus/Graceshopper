@@ -81,7 +81,7 @@ class CheckoutCart extends React.Component {
       )
     } else {
       return (
-        <div className="center aligned content">
+        <div className="ui center aligned container">
           <h1>Cart is Empty!</h1>
         </div>
       )
