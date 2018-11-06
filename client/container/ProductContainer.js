@@ -35,8 +35,15 @@ class ProductsContainer extends Component {
     this.props.getCartFromServer()
   }
 
-  handleClick = async item => {
-    await this.props.addToCart(this.props.userId, item)
+  handleClick = item => {
+    this.props.addToCart(this.props.userId, item)
+    this.routeChange()
+  }
+
+  routeChange() {
+    // redirect to list of items after completed
+    let path = `/cart`
+    this.props.history.push(path)
   }
 
   render() {
