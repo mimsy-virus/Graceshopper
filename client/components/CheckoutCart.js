@@ -34,7 +34,6 @@ class CheckoutCart extends React.Component {
   }
 
   render() {
-    // console.log('this is props:', this.props)
     if (
       this.props.userId &&
       Object.keys(this.props.userCart).length > 0 &&
@@ -102,7 +101,13 @@ class CheckoutCart extends React.Component {
           <Link to="/checkout">Click to Checkout</Link>
         </div>
       )
-    } else return <h1>Cart is Empty!</h1>
+    } else {
+      return (
+        <div className="ui center aligned content">
+          <h1>Cart is Empty!</h1>
+        </div>
+      )
+    }
   }
 }
 

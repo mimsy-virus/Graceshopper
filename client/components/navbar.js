@@ -1,39 +1,63 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import { logout } from '../store'
 // import newProductForm from './newProductForm'
 
 const Navbar = ({ handleClick, isLoggedIn }) => (
-  <div>
-    <h1>Grace Shopper</h1>
-    <nav>
-      {isLoggedIn ? (
-        <div>
-          {/* The navbar will show these links after you log in */}
-          <Link to="/home">Home</Link>
-          <Link to="/products">Products</Link>
-          <Link to="/account">Account</Link>
-          <a href="#" onClick={handleClick}>
-            Logout
-          </a>
-          <Link to="/cart">Cart</Link>
-          {/* {isAdmin && <Link to="/newProductForm">new product</Link>} */}
+  <React.Fragment>
+    {isLoggedIn ? (
+      <React.Fragment>
+        <a className="item">
+          <NavLink to="/home">Home</NavLink>
+        </a>
+        <a className="item">
+          <NavLink to="/products">Products</NavLink>
+        </a>
+        <a className="item">
+          <NavLink to="/account">Account</NavLink>
+        </a>
+        <a className="item">
+          <NavLink to="/cart">Cart</NavLink>
+        </a>
+        <div className="right menu">
+          <div className="item">
+            <a className="ui button" href="#" onClick={handleClick}>
+              Logout
+            </a>
+          </div>
         </div>
-      ) : (
-        <div>
-          {/* The navbar will show these links before you log in */}
-          <Link to="/home">Home</Link>
-          <Link to="/products">Products</Link>
-          <Link to="/login">Login</Link>
-          <Link to="/signup">Sign Up</Link>
-          <Link to="/cart">Cart</Link>
+      </React.Fragment>
+    ) : (
+      <React.Fragment>
+        <a className="item">
+          <NavLink to="/home">Home</NavLink>
+        </a>
+        <a className="item">
+          <NavLink to="/products">Products</NavLink>
+        </a>
+        <a className="item">
+          <NavLink to="/account">Account</NavLink>
+        </a>
+        <a className="item">
+          <NavLink to="/cart">Cart</NavLink>
+        </a>
+        <div className="right menu">
+          <div className="item">
+            <a className="ui button">
+              <NavLink to="/login">Login</NavLink>
+            </a>
+          </div>
+          <div className="item">
+            <a className="ui button">
+              <NavLink to="/signup">Sign Up</NavLink>
+            </a>
+          </div>
         </div>
-      )}
-    </nav>
-    <hr />
-  </div>
+      </React.Fragment>
+    )}
+  </React.Fragment>
 )
 
 /**

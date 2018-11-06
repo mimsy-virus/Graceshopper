@@ -28,6 +28,13 @@ class ProductsContainer extends Component {
 
   handleClick = item => {
     this.props.addToCart(this.props.userId, item)
+    this.routeChange()
+  }
+
+  routeChange() {
+    // redirect to list of items after completed
+    let path = `/cart`
+    this.props.history.push(path)
   }
 
   render() {
@@ -36,15 +43,17 @@ class ProductsContainer extends Component {
         <ProductsList title="Products">
           <FilterMenu handleChange={this.handleChange} {...this.state} />
           <Search />
-          {this.props.productList.map(product => (
-            <ProductItem
-              key={product.id}
-              product={product}
-              isLoggedIn={this.props.isLoggedIn}
-              // onAddToCartClicked
-              onClick={this.handleClick}
-            />
-          ))}
+          <div role="list" className="ui selection middle aligned list">
+            {this.props.productList.map(product => (
+              <ProductItem
+                key={product.id}
+                product={product}
+                isLoggedIn={this.props.isLoggedIn}
+                // onAddToCartClicked
+                onClick={this.handleClick}
+              />
+            ))}
+          </div>
         </ProductsList>
       )
     )

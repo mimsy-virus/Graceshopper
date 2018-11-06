@@ -27,10 +27,9 @@ class CheckoutForm extends React.Component {
     return (
       <div>
         <label>
-          Card info
           <CardElement />
         </label>
-        <button onClick={this.handleSubmit} type="submit">
+        <button onClick={this.handleSubmit} type="submit" className="ui button">
           Place your order
         </button>
         {this.state.completed && this.props.history.push('/ordercompleted')}

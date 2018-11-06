@@ -37,35 +37,55 @@ class CheckoutCart extends React.Component {
       const itemList = this.props.userCart
       const productList = this.props.productList
       return (
-        <div role="list" className="ui divided middle aligned list">
-          <button type="button" onClick={this.handleClear.bind(this)}>
-            CLEAR CART
-          </button>
-          {Object.keys(itemList).map(elem => {
-            const product = productList.find(
-              product => product.id === Number(elem)
-            )
-            // curPrice = Number(product.price) * Number(this.props.userCart[elem])
-            subtotal += Number(product.price) * Number(itemList[elem])
-
-            return (
-              <ItemList
-                key={elem}
-                elem={elem}
-                product={product}
-                handleRemove={this.handleRemove.bind(this)}
-                handleUpdate={this.handleUpdate.bind(this)}
-                quantity={itemList[elem]}
-                // curPrice={this.state.curPrice}
-              />
-            )
-          })}
-          <h3>SUBTOTAL : ${subtotal}</h3>
-
-          <Link to="/checkout">Click to Checkout</Link>
+        <div role="list" className="ui middle aligned list">
+          <div className="item">
+            {Object.keys(itemList).map(elem => {
+              const product = productList.find(
+                product => product.id === Number(elem)
+              )
+              // curPrice = Number(product.price) * Number(this.props.userCart[elem])
+              subtotal += Number(product.price) * Number(itemList[elem])
+              return (
+                <ItemList
+                  key={elem}
+                  elem={elem}
+                  product={product}
+                  handleRemove={this.handleRemove.bind(this)}
+                  handleUpdate={this.handleUpdate.bind(this)}
+                  quantity={itemList[elem]}
+                  // curPrice={this.state.curPrice}
+                />
+              )
+            })}
+          </div>
+          <div className="item">
+            <div className="right floated content">
+              <button type="button" onClick={this.handleClear.bind(this)}>
+                CLEAR CART
+              </button>
+            </div>
+          </div>
+          <div className="item">
+            <div className="right floated content">
+              <h3>SUBTOTAL : ${subtotal}</h3>
+            </div>
+          </div>
+          <div className="item">
+            <div className="right floated content">
+              <button type="button" href="/checkout">
+                <Link to="/checkout">Click to Checkout</Link>
+              </button>
+            </div>
+          </div>
         </div>
       )
-    } else return <h1>Cart is Empty!</h1>
+    } else {
+      return (
+        <div className="center aligned content">
+          <h1>Cart is Empty!</h1>
+        </div>
+      )
+    }
   }
 
   async handleRemove(event) {
