@@ -11,13 +11,13 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import ItemList from './ItemList'
 import CheckoutForm from '../checkoutForm/CheckoutForm'
+import { setSubtotal } from '../../store/checkout'
 
 class CheckoutCart extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      item: {},
-      subtotal: 0
+      item: {}
     }
   }
   async componentDidMount() {
@@ -107,7 +107,9 @@ const mapDispatchToProps = dispatch => ({
 
   clearCartFromServer: userId => dispatch(clearCartFromServer(userId)),
 
-  getCurrentProduct: () => dispatch(getCurrentProduct())
+  getCurrentProduct: () => dispatch(getCurrentProduct()),
+
+  setSubTotal: subtotal => dispatch(setSubtotal(subtotal))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(CheckoutCart)
