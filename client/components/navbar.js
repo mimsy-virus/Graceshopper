@@ -7,28 +7,49 @@ import { logout } from '../store'
 
 const Navbar = ({ handleClick, isLoggedIn }) => (
   <div>
-    <h1>Grace Shopper</h1>
     <nav>
       {isLoggedIn ? (
-        <div>
+        <div role="list" className="ui celled horizontal list">
+          <div role="listitem" className="item">
+            <Link to="/home">Home</Link>
+          </div>
+          <div role="listitem" className="item">
+            <Link to="/products">Products</Link>
+          </div>
+          <div role="listitem" className="item">
+            <Link to="/account">Account</Link>
+          </div>
+          <div role="listitem" className="item">
+            <a href="#" onClick={handleClick}>
+              Logout
+            </a>
+          </div>
           {/* The navbar will show these links after you log in */}
-          <Link to="/home">Home</Link>
-          <Link to="/products">Products</Link>
-          <Link to="/account">Account</Link>
-          <a href="#" onClick={handleClick}>
-            Logout
-          </a>
-          <Link to="/cart">Cart</Link>
+          <div role="listitem" className="item">
+            <Link to="/cart">Cart</Link>
+          </div>
           {/* {isAdmin && <Link to="/newProductForm">new product</Link>} */}
         </div>
       ) : (
         <div>
           {/* The navbar will show these links before you log in */}
-          <Link to="/home">Home</Link>
-          <Link to="/products">Products</Link>
-          <Link to="/login">Login</Link>
-          <Link to="/signup">Sign Up</Link>
-          <Link to="/cart">Cart</Link>
+          <div role="list" className="ui celled horizontal list">
+            <div role="listitem" className="item">
+              <Link to="/home">Home</Link>
+            </div>
+            <div role="listitem" className="item">
+              <Link to="/products">Products</Link>
+            </div>
+            <div role="listitem" className="item">
+              <Link to="/login">Login</Link>
+            </div>
+            <div role="listitem" className="item">
+              <Link to="/signup">Sign Up</Link>
+            </div>
+            <div role="listitem" className="item">
+              <Link to="/cart">Cart</Link>
+            </div>
+          </div>
         </div>
       )}
     </nav>

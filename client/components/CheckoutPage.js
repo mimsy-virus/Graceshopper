@@ -33,6 +33,7 @@ class CheckoutPage extends Component {
         [evt.target.name]: evt.target.value
       }
     })
+    console.log(this.state)
   }
 
   handleSubmit = async evt => {
@@ -70,69 +71,90 @@ class CheckoutPage extends Component {
       shippingState,
       shippingZipCode
     } = shippingInfo
+
     return (
       <div>
-        <h3>Shipping Info:</h3>
-        <form onSubmit={this.handleSubmit}>
-          <label>
-            First Name
-            <input
-              type="text"
-              name="firstName"
-              onChange={this.handleChange}
-              value={firstName}
-            />
-          </label>
-          <label>
-            Last Name
-            <input
-              type="text"
-              name="lastName"
-              onChange={this.handleChange}
-              value={lastName}
-            />
-          </label>
-          <label>
-            Address
-            <input
-              type="text"
-              name="shippingAddress"
-              onChange={this.handleChange}
-              value={shippingAddress}
-            />
-          </label>
-          <label>
-            City
-            <input
-              type="text"
-              name="shippingCity"
-              onChange={this.handleChange}
-              value={shippingCity}
-            />
-          </label>
-          <label>
-            State
-            <input
-              type="text"
-              name="shippingState"
-              onChange={this.handleChange}
-              value={shippingState}
-            />
-          </label>
-          <label>
-            Zip Code
-            <input
-              type="text"
-              name="shippingZipCode"
-              onChange={this.handleChange}
-              value={shippingZipCode}
-            />
-          </label>
-          <button type="submit">Confirm the Order</button>
+        <form className="ui form" onSubmit={this.handleSubmit}>
+          <h4 className="ui dividing header">Shipping Information</h4>
+          <div className="field">
+            <label>Name</label>
+            <div className="two fields">
+              <div className="field">
+                <input
+                  type="text"
+                  name="firstName"
+                  placeholder="First Name"
+                  value={firstName}
+                  onChange={this.handleChange}
+                />
+              </div>
+              <div className="field">
+                <input
+                  type="text"
+                  name="lastName"
+                  placeholder="Last Name"
+                  value={lastName}
+                  onChange={this.handleChange}
+                />
+              </div>
+            </div>
+            <div className="field">
+              <label>Billing Address</label>
+              <div className="fields">
+                <div className="eight wide field">
+                  <input
+                    type="text"
+                    name="shippingAddress"
+                    placeholder="Street Address"
+                    onChange={this.handleChange}
+                    value={shippingAddress}
+                  />
+                </div>
+                <div className="four wide field">
+                  <input
+                    type="text"
+                    name="shippingCity"
+                    placeholder="City"
+                    onChange={this.handleChange}
+                    value={shippingCity}
+                  />
+                </div>
+                <div className="two wide field">
+                  <input
+                    type="text"
+                    className="ui fluid dropdown"
+                    onChange={this.handleChange}
+                    placeholder="state"
+                    name="shippingState"
+                    value={shippingState}
+                  />
+                </div>
+                <div className="two wide field">
+                  <input
+                    type="text"
+                    name="shippingZipCode"
+                    placeholder="ZipCode"
+                    onChange={this.handleChange}
+                    value={shippingZipCode}
+                  />
+                </div>
+              </div>
+            </div>
+            <div className="field">
+              {!isCheckoutStarted && (
+                <div className="center aligned content">
+                  <button className="ui button" tabIndex="0" type="submit">
+                    Submit Information
+                  </button>
+                </div>
+              )}
+            </div>
+          </div>
+          {isCheckoutStarted && (
+            <h4 className="ui dividing header">Card Information</h4>
+          )}
         </form>
-        <div className="testdiv">
-          {isCheckoutStarted && <MyStoreCheckout />}
-        </div>
+        {isCheckoutStarted && <MyStoreCheckout />}
       </div>
     )
   }
