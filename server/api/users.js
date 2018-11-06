@@ -1,7 +1,8 @@
 const router = require('express').Router()
-const { User } = require('../db/models')
+const { User, Order } = require('../db/models')
 const { isAuthenticated } = require('./apiProtection/isAuthenticated')
 const { ifIsAdmin } = require('./apiProtection/isAdmin')
+
 module.exports = router
 
 router.get('/', ifIsAdmin, async (req, res, next) => {
@@ -24,6 +25,21 @@ router.get('/', ifIsAdmin, async (req, res, next) => {
       ]
     })
     res.json(users)
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.get('/:id/history', isAuthenticated, async (req, res, next) => {
+  try {
+    const orders = await Order.findAll({
+      where: {
+        userId: req.params.id,
+        status: 'completed'
+      }
+    })
+    if (!orders.length) return res.status(404).send('Not found')
+    res.json(orders)
   } catch (err) {
     next(err)
   }

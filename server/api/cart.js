@@ -2,7 +2,7 @@ const router = require('express').Router()
 const { Order } = require('../db/models')
 const { OrderProduct } = require('../db/models')
 const { isAuthenticated } = require('./apiProtection/isAuthenticated')
-const { ifIsAdmin } = require('./apiProtection/isAdmin')
+
 module.exports = router
 
 router.get('/:id', isAuthenticated, async (req, res, next) => {
