@@ -11,41 +11,31 @@ router.get('/', async (req, res, next) => {
     next(err)
   }
 })
-router.get('/:id', async (req, res, next) => {
+router.get('/:id', isAuthenticated, async (req, res, next) => {
   try {
-    const userId = req.params.id
-    if (isAuthenticated(req, userId)) {
-      const order = await Order.findAll({
-        where: {
-          userId
-        }
-      })
-      if (!order) return res.status(404).send('Not found')
-      res.json(order)
-    } else {
-      res.status(401).send('Access Denied!')
-    }
+    const order = await Order.findAll({
+      where: {
+        userId: req.params.id
+      }
+    })
+    if (!order) return res.status(404).send('Not found')
+    res.json(order)
   } catch (err) {
     next(err)
   }
 })
 
-router.put('/:id', async (req, res, next) => {
+router.put('/:id', isAuthenticated, async (req, res, next) => {
   try {
-    const userId = req.params.id
-    if (isAuthenticated(req, userId)) {
-      const order = await Order.findOne({
-        where: {
-          userId: req.params.id,
-          status: 'cart'
-        }
-      })
-      if (!order) return res.status(404).send('Not found')
-      const udpatedOrder = order.update(req.body)
-      res.json(udpatedOrder)
-    } else {
-      res.status(401).send('Access Denied!')
-    }
+    const order = await Order.findOne({
+      where: {
+        userId: req.params.id,
+        status: 'cart'
+      }
+    })
+    if (!order) return res.status(404).send('Not found')
+    const udpatedOrder = order.update(req.body)
+    res.json(udpatedOrder)
   } catch (err) {
     next(err)
   }

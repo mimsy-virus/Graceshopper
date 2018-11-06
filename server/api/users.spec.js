@@ -10,11 +10,11 @@ const User = db.model('user')
 //   beforeEach(() => {
 //     return db.sync({ force: true })
 //   })
-//   const adminCredentials = {
+//   const adminCredentials = User.create({
 //     email: 'sponge@bob.com',
 //     password: 'thePassword1',
 //     isAdmin: true
-//   }
+//   })
 //   const regularUserCredentials = {
 //     email: 'cody@puppybook.com',
 //     password: 'thePassword2'
