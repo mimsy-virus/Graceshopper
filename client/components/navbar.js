@@ -7,7 +7,6 @@ import { logout } from '../store'
 
 const Navbar = ({ handleClick, isLoggedIn }) => (
   <div>
-    <h1>Grace Shopper</h1>
     <nav>
       {isLoggedIn ? (
         <div role="list" className="ui celled horizontal list">
