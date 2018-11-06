@@ -11,18 +11,17 @@ const SET_SUBTOTAL = 'SET_SUBTOTAL'
 
 //action creator
 
-const getTheSubTotal = subtotal => ({ type: GET_SUBTOTAL, subtotal })
+const getTheSubTotal = payload => ({ type: GET_SUBTOTAL, payload })
 const setTheSubTotal = subtotal => ({ type: SET_SUBTOTAL, subtotal })
 
 //thunk creator
 
-export const getSubtotal = subtotal => async dispatch => {
+export const getASubtotal = userId => async dispatch => {
   try {
-    const { data } = await axios.put(
-      `/api/orders/${subtotal.userId}`,
-      subtotal.subtotal
-    )
-    dispatch(getTheSubTotal(data))
+    const { data } = await axios.get(`/api/orders/${userId}`)
+    const subtotal = Number(data[data.length - 1].subTotal)
+
+    dispatch(getTheSubTotal(subtotal))
   } catch (err) {
     console.log(err)
   }
@@ -30,12 +29,24 @@ export const getSubtotal = subtotal => async dispatch => {
 
 export const setSubtotal = subtotal => async dispatch => {
   try {
-    const { data } = await axios.get(
-      `/api/orders${subtotal.userId}`,
-      subtotal.subtotal
-    )
+    const { data } = await axios.put(`/api/orders/${subtotal.userId[0]}`, {
+      subTotal: subtotal.subtotal
+    })
     dispatch(setTheSubTotal(data))
   } catch (err) {
     console.log(err)
   }
 }
+
+const reducer = (state = defaultState, action) => {
+  switch (action.type) {
+    case GET_SUBTOTAL:
+      return { ...state, subtotal: action.payload }
+    case SET_SUBTOTAL:
+      return { ...state, subtotal: action.subtotal }
+    default:
+      return state
+  }
+}
+
+export default reducer

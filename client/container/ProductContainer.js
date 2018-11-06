@@ -54,6 +54,7 @@ class ProductsContainer extends Component {
                 isLoggedIn={this.props.isLoggedIn}
                 // onAddToCartClicked
                 onClick={this.handleClick}
+                props={this.props}
               />
             ))}
           </div>

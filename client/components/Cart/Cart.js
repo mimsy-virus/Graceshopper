@@ -10,26 +10,14 @@ import {
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import ItemList from './ItemList'
-<<<<<<< HEAD
-import CheckoutPage from '../CheckoutPage'
-import axios from 'axios'
-=======
 import CheckoutForm from '../checkoutForm/CheckoutForm'
 import { setSubtotal } from '../../store/checkout'
->>>>>>> master
 
 class CheckoutCart extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-<<<<<<< HEAD
-      item: {
-        subtotal: 0
-      },
-      checkout: false
-=======
       item: {}
->>>>>>> master
     }
   }
   async componentDidMount() {
@@ -87,7 +75,7 @@ class CheckoutCart extends React.Component {
               <button
                 type="button"
                 href="/checkout"
-                onClick={() => this.updateSubtotal}
+                onClick={() => this.updateSubtotal(subtotal)}
               >
                 <Link to="/checkout">Click to Checkout</Link>
               </button>
@@ -104,18 +92,20 @@ class CheckoutCart extends React.Component {
     }
   }
   //delete one
-  goToCheckout = async subtotal => {
-    this.setState({ checkout: true })
-    try {
-      const { data } = await axios.put(`/api/orders/${this.props.userId}`, {
-        subTotal: subtotal
-      })
-    } catch (err) {
-      console.log(err)
-    }
-  }
+  // goToCheckout = async subtotal => {
+  //   this.setState({ checkout: true })
+  //   try {
+  //     const { data } = await axios.put(`/api/orders/${this.props.userId}`, {
+  //       subTotal: subtotal
+  //     })
+  //   } catch (err) {
+  //     console.log(err)
+  //   }
+  // }
   // handlechanges
-  updateSubtotal = () => {}
+  updateSubtotal = subtotal => {
+    this.props.setSubtotal({ userId: [this.props.userId], subtotal })
+  }
 
   async handleRemove(event) {
     event.preventDefault()
@@ -158,7 +148,7 @@ const mapDispatchToProps = dispatch => ({
 
   getCurrentProduct: () => dispatch(getCurrentProduct()),
 
-  setSubTotal: subtotal => dispatch(setSubtotal(subtotal))
+  setSubtotal: subtotal => dispatch(setSubtotal(subtotal))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(CheckoutCart)
