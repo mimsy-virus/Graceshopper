@@ -9,8 +9,8 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
   <React.Fragment>
     {isLoggedIn ? (
       <React.Fragment>
-        <a className="item" href="/home">
-          Home
+        <a className="item">
+          <Link to="/home">Home</Link>
         </a>
         <a className="item">
           <Link to="/products">Products</Link>
