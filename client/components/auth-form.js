@@ -11,10 +11,12 @@ const AuthForm = props => {
 
   return (
     <div className="ui placeholder segment">
-      <header as="h2" color="black" textAlign="center">
-        {displayName} to your account
-      </header>
-      <div className="ui center aligned content" width="50 %">
+      <div className="ui center aligned container">
+        <header>
+          <h2 color="black">{displayName} to your account</h2>
+        </header>
+      </div>
+      <div className="ui center aligned container">
         <div className="column">
           <form className="ui form" onSubmit={handleSubmit} name={name}>
             <div className="field">
@@ -44,9 +46,9 @@ const AuthForm = props => {
               {error && error.response && <div> {error.response.data} </div>}
             </div>
           </form>
-          <message>
+          <button>
             <a href="/auth/google">{displayName} with Google</a>
-          </message>
+          </button>
         </div>
       </div>
     </div>

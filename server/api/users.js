@@ -1,9 +1,11 @@
 const router = require('express').Router()
-const { User } = require('../db/models')
+const { User, Order } = require('../db/models')
+const { isAuthenticated } = require('./apiProtection/isAuthenticated')
+const { ifIsAdmin } = require('./apiProtection/isAdmin')
 
 module.exports = router
 
-router.get('/', async (req, res, next) => {
+router.get('/', ifIsAdmin, async (req, res, next) => {
   try {
     const users = await User.findAll({
       // explicitly select only the id and email fields - even though
@@ -23,6 +25,31 @@ router.get('/', async (req, res, next) => {
       ]
     })
     res.json(users)
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.get('/:id/history', isAuthenticated, async (req, res, next) => {
+  try {
+    const orders = await Order.findAll({
+      where: {
+        userId: req.params.id,
+        status: 'completed'
+      }
+    })
+    if (!orders.length) return res.status(404).send('Not found')
+    res.json(orders)
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.get('/:id', isAuthenticated, async (req, res, next) => {
+  try {
+    const user = await User.findById(req.params.id)
+    if (!user) return res.status(404).send('Not found')
+    res.json(user)
   } catch (err) {
     next(err)
   }
