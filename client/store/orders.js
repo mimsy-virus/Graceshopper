@@ -7,7 +7,6 @@ export const getOrderForUser = orders => ({ type: GET_ORDER_FOR_USER, orders })
 export const fetchOrdersForUser = userId => async dispatch => {
   try {
     const { data } = await axios.get(`/api/users/${userId}/history`)
-    console.log(data)
     dispatch(getOrderForUser(data))
   } catch (err) {
     console.log(err)
