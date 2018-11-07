@@ -58,10 +58,4 @@ const ProductItem = props => {
   )
 }
 
-const mapStateToProps = state => {}
-
-const mapProps = dispatch => {
-  return {}
-}
-
-export default connect(null, mapProps)(ProductItem)
+export default ProductItem
