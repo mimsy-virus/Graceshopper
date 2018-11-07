@@ -44,20 +44,6 @@ describe('User model', () => {
           expect(err.message).to.contain('Validation isEmail on email failed')
         }
       })
-
-      //   it('requires email to be an unique', async () => {
-      //     try {
-      //       let codyCopy = await User.create({
-      //         email: 'cody@puppybook.com',
-      //         password: 'bones'
-      //       })
-      //       throw Error(
-      //         'validation was successful but should have failed if name is an empty string'
-      //       )
-      //     } catch (err) {
-      //       expect(err.message).to.contain('Validation isEmail on email failed')
-      //     }
-      //   })
     })
   }) // end describe('instanceMethods')
 }) // end describe('User model')
