@@ -3,9 +3,6 @@ import { Link, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 class ProductItem extends Component {
-  constructor(props) {
-    super(props)
-  }
   render() {
     // console.log(this.props.product)
     const product = this.props.product
@@ -51,7 +48,6 @@ class ProductItem extends Component {
                   </form>
                   <button
                     className="ui button"
-                    // disabled={!props.isLoggedIn}
                     role="button"
                     type="button"
                     value={name}
@@ -72,8 +68,6 @@ class ProductItem extends Component {
     )
   }
 }
-
-const mapStateToProps = state => {}
 
 const mapProps = dispatch => {
   return {}

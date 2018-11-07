@@ -5,9 +5,9 @@ import {
   addItemToServer,
   getProductByCategory,
   getCartFromServer,
-  updateItemToServer
+  updateItemToServer,
+  getASingleProduct
 } from '../store'
-import { getASingleProduct } from '../store/product.js'
 
 class SingleProduct extends Component {
   constructor(props) {
@@ -24,21 +24,7 @@ class SingleProduct extends Component {
 
   handleSubmit() {}
   handleClick = async item => {
-    // await this.props.getCartFromServer(this.props.userId)
-
-    // if (Object.keys(this.props.userCart).includes(Object.keys(item)[0])) {
-    //   const idx = Object.keys(this.props.userCart).find(
-    //     key => key === Object.keys(item)[0]
-    //   )
-    //   const inputqty = Object.values(item)[0]
-    //   const curqty = this.props.userCart[idx]
-    //   const newqty = curqty + Number(inputqty)
-    //   console.log('this is idx:', idx)
-    //   await this.props.updateItem(this.props.userId, { [idx]: newqty })
-    // } else {
     await this.props.addToCart(this.props.userId, item)
-    // }
-
     this.routeChange()
   }
 
