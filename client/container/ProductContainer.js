@@ -9,7 +9,8 @@ import {
   getCurrentProduct,
   addItemToServer,
   getProductByCategory,
-  getCartFromServer
+  getCartFromServer,
+  updateItemToServer
 } from '../store'
 import SingleProduct from '../components/SingleProduct'
 
@@ -26,17 +27,29 @@ class ProductsContainer extends Component {
   }
 
   handleChange = evt => {
-    // console.log(evt.target.value)
     this.setState({
       selectedCategory: evt.target.value
     })
-    // console.log(this.state)
-    // this.props.getProductByCategory(this.state.selectedCategory)
     this.props.getCartFromServer()
   }
 
-  handleClick = item => {
-    this.props.addToCart(this.props.userId, item)
+  handleClick = async item => {
+    await this.props.getCartFromServer(this.props.userId)
+
+    if (Object.keys(this.props.userCart).includes(Object.keys(item)[0])) {
+      const idx = Object.keys(this.props.userCart).find(
+        key => key === Object.keys(item)[0]
+      )
+      const inputqty = Object.values(item)[0]
+      const curqty = this.props.userCart[idx]
+      const newqty = curqty + Number(inputqty)
+
+      console.log('this is idx:', idx)
+      await this.props.updateItem(this.props.userId, { [idx]: newqty })
+    } else {
+      await this.props.addToCart(this.props.userId, item)
+    }
+
     this.routeChange()
   }
 
@@ -76,14 +89,15 @@ const mapStateToProps = state => ({
   isLoggedIn: !!state.user.id,
   userId: state.user.id,
   selectedProducts: state.selectedProducts,
-  userCart: state.userCart
+  userCart: state.cart.userCart
   // isAdmin : state.user.adimin
 })
 const mapDispatchToProps = dispatch => ({
   fetchProducts: () => dispatch(getCurrentProduct()),
   addToCart: (userId, item) => dispatch(addItemToServer(userId, item)),
   getProductByCategory: category => dispatch(getProductByCategory(category)),
-  getCartFromServer: itemId => dispatch(getCartFromServer(itemId))
+  getCartFromServer: userId => dispatch(getCartFromServer(userId)),
+  updateItem: (userId, item) => dispatch(updateItemToServer(userId, item))
 
   // add a prop which can add the product into the cart
 })
