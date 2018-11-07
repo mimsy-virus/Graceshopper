@@ -27,12 +27,16 @@ class ProductsContainer extends Component {
 
   handleClick = item => {
     this.props.addToCart(this.props.userId, item)
-    this.routeChange()
+    if (this.props.isLoggedIn) {
+      this.routeChange('cart')
+    } else {
+      this.routeChange('login')
+    }
   }
 
-  routeChange() {
+  routeChange(route) {
     // redirect to list of items after completed
-    let path = `/cart`
+    let path = `/${route}`
     this.props.history.push(path)
   }
 
