@@ -39,7 +39,7 @@ const OrderHistory = props => {
                 <div role="listitem" className="item">
                   <h4>
                     Item Total: $
-                    {orderProduct.price}
+                    {Number(orderProduct.price) * Number(orderProduct.quantity)}
                   </h4>
                 </div>
               </div>

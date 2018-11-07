@@ -20,13 +20,11 @@ class CheckoutCart extends React.Component {
     }
   }
   async componentDidMount() {
-    // console.log('state in mount', this.state)
     await this.props.getCurrentProduct()
     this.setState({ item: this.props.getCartFromServer(this.props.userId) })
   }
 
   render() {
-    // console.log('STATE', this.state)
     let subtotal = 0
     if (
       this.props.userId &&
@@ -52,7 +50,6 @@ class CheckoutCart extends React.Component {
                   handleRemove={this.handleRemove.bind(this)}
                   handleUpdate={this.handleUpdate.bind(this)}
                   quantity={itemList[elem]}
-                  // curPrice={this.state.curPrice}
                 />
               )
             })}
@@ -90,18 +87,7 @@ class CheckoutCart extends React.Component {
       )
     }
   }
-  //delete one
-  // goToCheckout = async subtotal => {
-  //   this.setState({ checkout: true })
-  //   try {
-  //     const { data } = await axios.put(`/api/orders/${this.props.userId}`, {
-  //       subTotal: subtotal
-  //     })
-  //   } catch (err) {
-  //     console.log(err)
-  //   }
-  // }
-  // handlechanges
+
   updateSubtotal = subtotal => {
     this.props.setSubtotal({ userId: [this.props.userId], subtotal })
   }

@@ -46,19 +46,18 @@ class ProductItem extends Component {
                     <input
                       type="number"
                       onChange={handleChange}
-                      placeholder={0}
+                      placeholder={1}
                     />
                   </form>
                   <button
                     className="ui button"
-                    // disabled={!props.isLoggedIn}
                     role="button"
                     type="button"
                     value={name}
                     onClick={() =>
                       this.props.isLoggedIn
                         ? this.props.onClick({ [productId]: quantity })
-                        : this.props.history.push('/signup')
+                        : this.props.history.push('/login')
                     }
                   >
                     ADD TO CART
@@ -73,10 +72,4 @@ class ProductItem extends Component {
   }
 }
 
-const mapStateToProps = state => {}
-
-const mapProps = dispatch => {
-  return {}
-}
-
-export default withRouter(connect(null, mapProps)(ProductItem))
+export default withRouter(ProductItem)
