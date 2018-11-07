@@ -33,7 +33,6 @@ class ProductsContainer extends Component {
 
   handleClick = async item => {
     await this.props.getCartFromServer(this.props.userId)
-
     if (Object.keys(this.props.userCart).includes(Object.keys(item)[0])) {
       const idx = Object.keys(this.props.userCart).find(
         key => key === Object.keys(item)[0]

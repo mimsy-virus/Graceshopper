@@ -5,9 +5,9 @@ import {
   addItemToServer,
   getProductByCategory,
   getCartFromServer,
-  updateItemToServer,
-  getASingleProduct
+  updateItemToServer
 } from '../store'
+import { getASingleProduct } from '../store/product.js'
 
 class SingleProduct extends Component {
   constructor(props) {
@@ -22,7 +22,6 @@ class SingleProduct extends Component {
     this.setState({ singleProduct: this.props.singleProduct })
   }
 
-  handleSubmit() {}
   handleClick = async item => {
     await this.props.addToCart(this.props.userId, item)
     this.routeChange()
