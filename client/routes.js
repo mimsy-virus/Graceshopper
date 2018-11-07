@@ -26,34 +26,36 @@ class Routes extends Component {
     const { isLoggedIn } = this.props
 
     return (
-      <Switch>
-        {/* Routes placed here are available to all visitors */}
-        <Route path="/login" component={Login} />
-        <Route path="/signup" component={Signup} />
-        <Route exact path="/products" component={ProductContainer} />
-        <Route path="/products/:id" component={SingleProduct} />
-        <Route exact path="/cart" component={Cart} />
-        {isLoggedIn && (
-          <Switch>
-            {/* Routes placed here are only available after logging in */}
-            <Route path="/newProductForm" component={newProductForm} />
-            <Route exact path="/home" component={Home} />
-            <Route exact path="/" component={Home} />
-            <Route exact path="/checkout" component={CheckoutPage} />
-            <Route exact path="/account" component={AccountPage} />
-            <Route exact path="/ordercompleted" component={OrderCompleted} />
-            <Route exact path="/account" component={UserHome} />
-          </Switch>
-        )}
-        {!isLoggedIn && (
-          <Switch>
-            <Route exact path="/" component={Home} />
-            <Route exact path="/home" component={Home} />
-          </Switch>
-        )}
-        {/* Displays our Login component as a fallback */}
-        <Route component={Login} />
-      </Switch>
+      <div className="main-body">
+        <Switch>
+          {/* Routes placed here are available to all visitors */}
+          <Route path="/login" component={Login} />
+          <Route path="/signup" component={Signup} />
+          <Route exact path="/products" component={ProductContainer} />
+          <Route path="/products/:id" component={SingleProduct} />
+          <Route exact path="/cart" component={Cart} />
+          {isLoggedIn && (
+            <Switch>
+              {/* Routes placed here are only available after logging in */}
+              <Route path="/newProductForm" component={newProductForm} />
+              <Route exact path="/home" component={Home} />
+              <Route exact path="/" component={Home} />
+              <Route exact path="/checkout" component={CheckoutPage} />
+              <Route exact path="/account" component={AccountPage} />
+              <Route exact path="/ordercompleted" component={OrderCompleted} />
+              <Route exact path="/account" component={UserHome} />
+            </Switch>
+          )}
+          {!isLoggedIn && (
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <Route exact path="/home" component={Home} />
+            </Switch>
+          )}
+          {/* Displays our Login component as a fallback */}
+          <Route component={Login} />
+        </Switch>
+      </div>
     )
   }
 }
