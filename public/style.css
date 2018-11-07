@@ -23,3 +23,13 @@ form div {
 .product-item img {
   max-width: 200px;
 }
+
+.main-body {
+  margin: 40px auto;
+  padding: 0 15px;
+  max-width: 1140px;
+}
+
+div.item {
+  margin: 20px 0;
+}

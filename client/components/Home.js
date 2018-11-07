@@ -9,7 +9,7 @@ const Home = props => {
           <h1>Welcome to Mimsy Medical</h1>
         </header>
         <h2>
-          We are an e-commerce website commit to selling cheap and affordable
+          We are an e-commerce website committed to selling cheap and affordable
           medication
         </h2>
         <div className="ui huge button">
