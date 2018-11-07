@@ -51,7 +51,7 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
           </div>
           <div className="item">
             <a className="ui button">
-              <Link to="/signup">Sign Up</Link>
+              <Link to="/cart">Cart</Link>
             </a>
           </div>
         </div>

@@ -10,7 +10,6 @@ import {
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import ItemList from './ItemList'
-import CheckoutForm from '../checkoutForm/CheckoutForm'
 
 class CheckoutCart extends React.Component {
   constructor(props) {
