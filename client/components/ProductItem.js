@@ -37,56 +37,34 @@ class ProductItem extends Component {
                   <h2>${price}</h2>
                 </div>
               </div>
-              <div role="list" className="ui middle aligned list">
-                <div role="listitem" className="item">
-                  <div>
-                    <form>
-                      <label>Quantity:</label>
-                      <input
-                        type="number"
-                        onChange={handleChange}
-                        placeholder={0}
-                      />
-                    </form>
-                    <button
-                      className="ui button"
-                      // disabled={!props.isLoggedIn}
-                      role="button"
-                      type="button"
-                      value={name}
-                      onClick={() =>
-                        this.props.isLoggedIn
-                          ? this.props.onClick({ [productId]: quantity })
-                          : this.props.history.push('/signup')
-                      }
-                    >
-                      ADD TO CART
-                    </button>
-                  </div>
-                </div>
-                <div role="listitem" className="item">
-                  <h2>${price}</h2>
+            </Link>
+            <div role="list" className="ui middle aligned list">
+              <div role="listitem" className="item">
+                <div>
+                  <form>
+                    <label>Quantity:</label>
+                    <input
+                      type="number"
+                      onChange={handleChange}
+                      placeholder={0}
+                    />
+                  </form>
+                  <button
+                    className="ui button"
+                    // disabled={!props.isLoggedIn}
+                    role="button"
+                    type="button"
+                    value={name}
+                    onClick={() =>
+                      this.props.isLoggedIn
+                        ? this.props.onClick({ [productId]: quantity })
+                        : this.props.history.push('/signup')
+                    }
+                  >
+                    ADD TO CART
+                  </button>
                 </div>
               </div>
-            </Link>
-          </div>
-        </div>
-        <div role="list" className="ui middle aligned list">
-          <div role="listitem" className="item">
-            <div>
-              <form>
-                <label>Quantity:</label>
-                <input type="number" onChange={handleChange} placeholder={0} />
-              </form>
-              <button
-                className="ui button"
-                role="button"
-                type="button"
-                value={name}
-                onClick={() => props.onClick({ [productId]: quantity })}
-              >
-                ADD TO CART
-              </button>
             </div>
           </div>
         </div>
