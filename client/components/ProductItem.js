@@ -26,6 +26,7 @@ class ProductItem extends Component {
                 <img src={imgUrl} className="ui small middle aligned image" />
               </div>
               <div role="listitem" className="item">
+
                 <Link to={`/products/${this.props.product.id}`}>{name}</Link>
                 <div className="description">{description}</div>
               </div>
@@ -63,6 +64,28 @@ class ProductItem extends Component {
                   </button>
                 </div>
               </div>
+              <div role="listitem" className="item">
+                <h2>${price}</h2>
+              </div>
+            </div>
+          </Link>
+        </div>
+        <div role="list" className="ui middle aligned list">
+          <div role="listitem" className="item">
+            <div>
+              <form>
+                <label>Quantity:</label>
+                <input type="number" onChange={handleChange} placeholder={0} />
+              </form>
+              <button
+                className="ui button"
+                role="button"
+                type="button"
+                value={name}
+                onClick={() => props.onClick({ [productId]: quantity })}
+              >
+                ADD TO CART
+              </button>
             </div>
           </div>
         </div>
@@ -71,6 +94,7 @@ class ProductItem extends Component {
   }
 }
 
+
 const mapStateToProps = state => {}
 
 const mapProps = dispatch => {
@@ -78,3 +102,4 @@ const mapProps = dispatch => {
 }
 
 export default withRouter(connect(null, mapProps)(ProductItem))
+

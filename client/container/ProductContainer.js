@@ -14,6 +14,7 @@ import {
 } from '../store'
 import SingleProduct from '../components/SingleProduct'
 
+
 class ProductsContainer extends Component {
   constructor(props) {
     super(props)

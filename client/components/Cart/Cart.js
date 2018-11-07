@@ -10,8 +10,11 @@ import {
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import ItemList from './ItemList'
+<<<<<<< HEAD
 import CheckoutForm from '../checkoutForm/CheckoutForm'
 import { setSubtotal } from '../../store/checkout'
+=======
+>>>>>>> e576f3738244233dd5ffbf009fb7dbcf5ae346f7
 
 class CheckoutCart extends React.Component {
   constructor(props) {
@@ -85,7 +88,7 @@ class CheckoutCart extends React.Component {
       )
     } else {
       return (
-        <div className="center aligned content">
+        <div className="ui center aligned container">
           <h1>Cart is Empty!</h1>
         </div>
       )

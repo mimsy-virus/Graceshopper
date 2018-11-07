@@ -10,6 +10,7 @@ import checkout from './checkout'
 
 const reducer = combineReducers({ user, products, product, cart, checkout })
 
+
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
 )

@@ -4,14 +4,15 @@ import { withRouter, Route, Switch } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { Login, Signup } from './components'
 import UserHome from './components/user-home'
-import newProductForm from './components/NewProductForm'
+import newProductForm from './components/newProductForm'
 import { me } from './store'
 import ProductContainer from './container/ProductContainer'
-import SingleProduct from './components/SingleProduct'
+import SingleProduct from './components/singleProduct'
 import Home from './components/Home'
 import Cart from './components/Cart/Cart'
 import CheckoutPage from './components/CheckoutPage'
 import OrderCompleted from './components/checkoutForm/OrderCompletedPage'
+import AccountPage from './components/AccountPage'
 
 /**
  * COMPONENT
@@ -39,6 +40,7 @@ class Routes extends Component {
             <Route exact path="/home" component={Home} />
             <Route exact path="/" component={Home} />
             <Route exact path="/checkout" component={CheckoutPage} />
+            <Route exact path="/account" component={AccountPage} />
             <Route exact path="/ordercompleted" component={OrderCompleted} />
             <Route exact path="/account" component={UserHome} />
           </Switch>
