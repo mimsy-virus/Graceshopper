@@ -16,43 +16,40 @@ const ProductItem = props => {
     <div>
       <div role="listitem" className="item">
         <div className="content">
-          <div role="list" className="ui horizontal relaxed list">
-            <div role="listitem" className="item">
-              <img src={imgUrl} className="ui small middle aligned image" />
-            </div>
-            <div role="listitem" className="item">
-              <Link to={`/products/${props.product.id}`}>{name}</Link>
-              <div className="description">{description}</div>
-            </div>
-            <div role="listitem" className="item">
-              <p>category: {category}</p>
-            </div>
-            <div role="listitem" className="item">
-              <h2>${price}</h2>
-            </div>
-          </div>
-          <div role="list" className="ui middle aligned list">
-            <div role="listitem" className="item">
-              <div>
-                <form>
-                  <label>Quantity:</label>
-                  <input
-                    type="number"
-                    onChange={handleChange}
-                    placeholder={0}
-                  />
-                </form>
-                <button
-                  className="ui button"
-                  disabled={!props.isLoggedIn}
-                  role="button"
-                  type="button"
-                  value={name}
-                  onClick={() => props.onClick({ [productId]: quantity })}
-                >
-                  ADD TO CART
-                </button>
+          <Link to={`/products/${props.product.id}`}>
+            <div role="list" className="ui horizontal relaxed list">
+              <div role="listitem" className="item">
+                <img src={imgUrl} className="ui small middle aligned image" />
               </div>
+              <div role="listitem" className="item">
+                {name}
+                <div className="description">{description}</div>
+              </div>
+              <div role="listitem" className="item">
+                <p>category: {category}</p>
+              </div>
+              <div role="listitem" className="item">
+                <h2>${price}</h2>
+              </div>
+            </div>
+          </Link>
+        </div>
+        <div role="list" className="ui middle aligned list">
+          <div role="listitem" className="item">
+            <div>
+              <form>
+                <label>Quantity:</label>
+                <input type="number" onChange={handleChange} placeholder={0} />
+              </form>
+              <button
+                className="ui button"
+                role="button"
+                type="button"
+                value={name}
+                onClick={() => props.onClick({ [productId]: quantity })}
+              >
+                ADD TO CART
+              </button>
             </div>
           </div>
         </div>

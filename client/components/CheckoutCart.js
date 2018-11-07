@@ -79,9 +79,6 @@ class CheckoutCart extends React.Component {
                       onChange={this.handleUpdate.bind(this)}
                       placeholder={this.props.userCart[elem]}
                     />
-
-                    {/* <input type = 'number' onChange={}/> */}
-                    {/* <h3>Quantity: {this.props.userCart[elem]}</h3> */}
                     <h2>
                       price:
                       {curPrice}
@@ -103,7 +100,7 @@ class CheckoutCart extends React.Component {
       )
     } else {
       return (
-        <div className="ui center aligned content">
+        <div className="ui center aligned container">
           <h1>Cart is Empty!</h1>
         </div>
       )
