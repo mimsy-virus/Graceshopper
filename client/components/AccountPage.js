@@ -31,13 +31,16 @@ class AccountPage extends Component {
         <div>
           <button
             type="submit"
+            className="ui button"
             onClick={() => {
               return this.renderOrderHistory(user.id)
             }}
           >
             View Your Orders
           </button>
-          <button type="submit">Update your info</button>
+          <button className="ui button" type="submit">
+            Update your info
+          </button>
         </div>
         {orders && <OrderHistory orders={orders} />}
       </div>
