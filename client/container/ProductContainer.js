@@ -12,8 +12,6 @@ import {
   getCartFromServer,
   updateItemToServer
 } from '../store'
-import SingleProduct from '../components/SingleProduct'
-
 
 class ProductsContainer extends Component {
   constructor(props) {

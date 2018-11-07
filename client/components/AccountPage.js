@@ -17,9 +17,9 @@ class AccountPage extends Component {
   renderOrderHistory = userId => {
     this.props.getOrders(userId)
   }
+
   render() {
     const { user, orders } = this.props
-
     const userName =
       user.firstName || user.lastName
         ? `${user.firstName} ${user.lastName}`
@@ -31,15 +31,18 @@ class AccountPage extends Component {
         <div>
           <button
             type="submit"
+            className="ui button"
             onClick={() => {
               return this.renderOrderHistory(user.id)
             }}
           >
             View Your Orders
           </button>
-          <button type="submit">Update your info</button>
+          <button className="ui button" type="submit">
+            Update your info
+          </button>
         </div>
-        {!!orders.length && <OrderHistory orders={orders} />}
+        {orders && <OrderHistory orders={orders} />}
       </div>
     )
   }
