@@ -3,7 +3,6 @@ import axios from 'axios'
 import { connect } from 'react-redux'
 import { getCartFromServer } from '../store'
 import MyStoreCheckout from './checkoutForm/MyStoreCheckout'
-const subTotal = 300.01
 
 const total = 300 * 1.06
 class CheckoutPage extends Component {

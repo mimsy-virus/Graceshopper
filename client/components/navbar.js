@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { NavLink } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { logout } from '../store'
 // import newProductForm from './newProductForm'
 
@@ -10,16 +10,16 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
     {isLoggedIn ? (
       <React.Fragment>
         <a className="item">
-          <NavLink to="/home">Home</NavLink>
+          <Link to="/home">Home</Link>
         </a>
         <a className="item">
-          <NavLink to="/products">Products</NavLink>
+          <Link to="/products">Products</Link>
         </a>
         <a className="item">
-          <NavLink to="/account">Account</NavLink>
+          <Link to="/account">Account</Link>
         </a>
         <a className="item">
-          <NavLink to="/cart">Cart</NavLink>
+          <Link to="/cart">Cart</Link>
         </a>
         <div className="right menu">
           <div className="item">
@@ -32,26 +32,26 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
     ) : (
       <React.Fragment>
         <a className="item">
-          <NavLink to="/home">Home</NavLink>
+          <Link to="/home">Home</Link>
         </a>
         <a className="item">
-          <NavLink to="/products">Products</NavLink>
+          <Link to="/products">Products</Link>
         </a>
         <a className="item">
-          <NavLink to="/account">Account</NavLink>
+          <Link to="/account">Account</Link>
         </a>
         <a className="item">
-          <NavLink to="/cart">Cart</NavLink>
+          <Link to="/cart">Cart</Link>
         </a>
         <div className="right menu">
           <div className="item">
             <a className="ui button">
-              <NavLink to="/login">Login</NavLink>
+              <Link to="/login">Login</Link>
             </a>
           </div>
           <div className="item">
             <a className="ui button">
-              <NavLink to="/signup">Sign Up</NavLink>
+              <Link to="/cart">Cart</Link>
             </a>
           </div>
         </div>
