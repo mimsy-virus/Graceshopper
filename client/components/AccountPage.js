@@ -38,9 +38,6 @@ class AccountPage extends Component {
           >
             View Your Orders
           </button>
-          <button className="ui button" type="submit">
-            Update your info
-          </button>
         </div>
         {orders && <OrderHistory orders={orders} />}
       </div>
