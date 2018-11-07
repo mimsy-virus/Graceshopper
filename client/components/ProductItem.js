@@ -7,6 +7,7 @@ class ProductItem extends Component {
     super(props)
   }
   render() {
+    // console.log(this.props.product)
     const product = this.props.product
     const { name, description, imgUrl, price, category } = product
     const productId = product.id

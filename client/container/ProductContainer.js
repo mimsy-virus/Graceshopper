@@ -23,7 +23,6 @@ class ProductsContainer extends Component {
   }
   componentDidMount() {
     this.props.fetchProducts()
-    //console.log(this.props)
   }
 
   handleChange = evt => {
@@ -43,8 +42,6 @@ class ProductsContainer extends Component {
       const inputqty = Object.values(item)[0]
       const curqty = this.props.userCart[idx]
       const newqty = curqty + Number(inputqty)
-
-      console.log('this is idx:', idx)
       await this.props.updateItem(this.props.userId, { [idx]: newqty })
     } else {
       await this.props.addToCart(this.props.userId, item)
@@ -60,7 +57,6 @@ class ProductsContainer extends Component {
   }
 
   render() {
-    // console.log('state in filter:', this.state)
     return (
       !!this.props.productList.length && (
         <ProductsList title="Products">
@@ -72,7 +68,6 @@ class ProductsContainer extends Component {
                 key={product.id}
                 product={product}
                 isLoggedIn={this.props.isLoggedIn}
-                // onAddToCartClicked
                 onClick={this.handleClick}
                 props={this.props}
               />
@@ -90,7 +85,6 @@ const mapStateToProps = state => ({
   userId: state.user.id,
   selectedProducts: state.selectedProducts,
   userCart: state.cart.userCart
-  // isAdmin : state.user.adimin
 })
 const mapDispatchToProps = dispatch => ({
   fetchProducts: () => dispatch(getCurrentProduct()),
