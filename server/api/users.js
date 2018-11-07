@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const { User, Order } = require('../db/models')
+const { User, Order, OrderProduct, Product } = require('../db/models')
 const { isAuthenticated } = require('./apiProtection/isAuthenticated')
 const { ifIsAdmin } = require('./apiProtection/isAdmin')
 
@@ -38,8 +38,13 @@ router.get('/:id/history', isAuthenticated, async (req, res, next) => {
         status: 'completed'
       }
     })
+
     if (!orders.length) return res.status(404).send('Not found')
-    res.json(orders)
+    const ordersWithProducts = orders.map(order => order.getProducts())
+
+    const resolved = await Promise.all(ordersWithProducts)
+    console.log(resolved)
+    res.json(resolved)
   } catch (err) {
     next(err)
   }
