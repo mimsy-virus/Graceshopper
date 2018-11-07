@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import { connect } from 'react-redux'
 import { getCartFromServer } from '../store'
+import { getASubtotal } from '../store/checkout'
 import MyStoreCheckout from './checkoutForm/MyStoreCheckout'
 
-const total = 300 * 1.06
 class CheckoutPage extends Component {
   constructor(props) {
     super(props)
@@ -22,6 +22,7 @@ class CheckoutPage extends Component {
   }
   async componentDidMount() {
     await this.props.getCartFromServer(this.props.userId)
+    await this.props.getSubtotal(this.props.userId)
   }
 
   handleChange = evt => {
@@ -32,7 +33,6 @@ class CheckoutPage extends Component {
         [evt.target.name]: evt.target.value
       }
     })
-    console.log(this.state)
   }
 
   handleSubmit = async evt => {
@@ -43,8 +43,8 @@ class CheckoutPage extends Component {
       shippingState: this.state.shippingInfo.shippingState,
       shippingZipCode: this.state.shippingInfo.shippingZipCode,
       status: 'created',
-      subTotal: this.props.subTotal,
-      total,
+      subTotal: this.props.subtotal,
+      total: this.props.subtotal * 1.06,
       taxRate: 0.06
     }
     console.log(orderInfo)
@@ -61,6 +61,7 @@ class CheckoutPage extends Component {
   }
 
   render() {
+    // console.log(this.props.userCart)
     const { shippingInfo, isCheckoutStarted } = this.state
     const {
       firstName,
@@ -70,6 +71,7 @@ class CheckoutPage extends Component {
       shippingState,
       shippingZipCode
     } = shippingInfo
+    console.log('subtotal in checkout page', this.props.subtotal)
 
     return (
       <div>
@@ -161,9 +163,11 @@ class CheckoutPage extends Component {
 const mapStateToProps = state => ({
   userCart: state.cart.userCart,
   productList: state.products.productList,
-  userId: state.user.id
+  userId: state.user.id,
+  subtotal: state.checkout.subtotal
 })
 const mapDispatchToProps = dispatch => ({
-  getCartFromServer: userId => dispatch(getCartFromServer(userId))
+  getCartFromServer: userId => dispatch(getCartFromServer(userId)),
+  getSubtotal: userId => dispatch(getASubtotal(userId))
 })
 export default connect(mapStateToProps, mapDispatchToProps)(CheckoutPage)

@@ -78,7 +78,7 @@ class CheckoutCart extends React.Component {
               <button
                 type="button"
                 href="/checkout"
-                onClick={() => this.updateSubtotal}
+                onClick={() => this.updateSubtotal(subtotal)}
               >
                 <Link to="/checkout">Click to Checkout</Link>
               </button>
@@ -94,8 +94,21 @@ class CheckoutCart extends React.Component {
       )
     }
   }
-
-  updateSubtotal = () => {}
+  //delete one
+  // goToCheckout = async subtotal => {
+  //   this.setState({ checkout: true })
+  //   try {
+  //     const { data } = await axios.put(`/api/orders/${this.props.userId}`, {
+  //       subTotal: subtotal
+  //     })
+  //   } catch (err) {
+  //     console.log(err)
+  //   }
+  // }
+  // handlechanges
+  updateSubtotal = subtotal => {
+    this.props.setSubtotal({ userId: [this.props.userId], subtotal })
+  }
 
   async handleRemove(event) {
     event.preventDefault()
@@ -138,7 +151,7 @@ const mapDispatchToProps = dispatch => ({
 
   getCurrentProduct: () => dispatch(getCurrentProduct()),
 
-  setSubTotal: subtotal => dispatch(setSubtotal(subtotal))
+  setSubtotal: subtotal => dispatch(setSubtotal(subtotal))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(CheckoutCart)

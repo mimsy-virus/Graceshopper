@@ -20,7 +20,6 @@ import AccountPage from './components/AccountPage'
 class Routes extends Component {
   async componentDidMount() {
     await this.props.loadInitialData()
-    console.log('user id in routes:', this.props.userId)
   }
 
   render() {

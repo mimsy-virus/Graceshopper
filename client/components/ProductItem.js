@@ -1,32 +1,68 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { Component } from 'react'
+import { Link, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 
-const ProductItem = props => {
-  const product = props.product
-  const { name, description, imgUrl, price, category } = product
-  const productId = product.id
-  let quantity = 1
-
-  function handleChange(event) {
-    quantity = event.target.value
+class ProductItem extends Component {
+  constructor(props) {
+    super(props)
   }
+  render() {
+    // console.log(this.props.product)
+    const product = this.props.product
+    const { name, description, imgUrl, price, category } = product
+    const productId = product.id
+    let quantity = 1
 
-  return (
-    <div>
-      <div role="listitem" className="item">
-        <div className="content">
-          <Link to={`/products/${props.product.id}`}>
+    function handleChange(event) {
+      quantity = event.target.value
+    }
+
+    return (
+      <div>
+        <div role="listitem" className="item">
+          <div className="content">
             <div role="list" className="ui horizontal relaxed list">
               <div role="listitem" className="item">
                 <img src={imgUrl} className="ui small middle aligned image" />
               </div>
               <div role="listitem" className="item">
-                {name}
+
+                <Link to={`/products/${this.props.product.id}`}>{name}</Link>
                 <div className="description">{description}</div>
               </div>
               <div role="listitem" className="item">
                 <p>category: {category}</p>
+              </div>
+              <div role="listitem" className="item">
+                <h2>${price}</h2>
+              </div>
+            </div>
+            <div role="list" className="ui middle aligned list">
+              <div role="listitem" className="item">
+                <div>
+                  <form>
+                    <label>Quantity:</label>
+                    <input
+                      type="number"
+                      onChange={handleChange}
+                      placeholder={0}
+                    />
+                  </form>
+                  <button
+                    className="ui button"
+                    // disabled={!props.isLoggedIn}
+                    role="button"
+                    type="button"
+                    value={name}
+                    onClick={() =>
+                      this.props.isLoggedIn
+                        ? this.props.onClick({ [productId]: quantity })
+                        : this.props.history.push('/signup')
+                    }
+                  >
+                    ADD TO CART
+                  </button>
+                </div>
               </div>
               <div role="listitem" className="item">
                 <h2>${price}</h2>
@@ -54,8 +90,16 @@ const ProductItem = props => {
           </div>
         </div>
       </div>
-    </div>
-  )
+    )
+  }
 }
 
-export default ProductItem
+
+const mapStateToProps = state => {}
+
+const mapProps = dispatch => {
+  return {}
+}
+
+export default withRouter(connect(null, mapProps)(ProductItem))
+

@@ -5,7 +5,15 @@ import ProductItem from '../components/ProductItem'
 import ProductsList from '../components/ProductsList'
 import FilterMenu from '../components/FilterMenu'
 import Search from '../components/Search'
-import { getCurrentProduct, addItemToServer } from '../store'
+import {
+  getCurrentProduct,
+  addItemToServer,
+  getProductByCategory,
+  getCartFromServer,
+  updateItemToServer
+} from '../store'
+import SingleProduct from '../components/SingleProduct'
+
 
 class ProductsContainer extends Component {
   constructor(props) {
@@ -16,27 +24,36 @@ class ProductsContainer extends Component {
   }
   componentDidMount() {
     this.props.fetchProducts()
-    //console.log(this.props)
   }
 
   handleChange = evt => {
     this.setState({
       selectedCategory: evt.target.value
     })
+    this.props.getCartFromServer()
   }
 
-  handleClick = item => {
-    this.props.addToCart(this.props.userId, item)
-    if (this.props.isLoggedIn) {
-      this.routeChange('cart')
+  handleClick = async item => {
+    await this.props.getCartFromServer(this.props.userId)
+
+    if (Object.keys(this.props.userCart).includes(Object.keys(item)[0])) {
+      const idx = Object.keys(this.props.userCart).find(
+        key => key === Object.keys(item)[0]
+      )
+      const inputqty = Object.values(item)[0]
+      const curqty = this.props.userCart[idx]
+      const newqty = curqty + Number(inputqty)
+      await this.props.updateItem(this.props.userId, { [idx]: newqty })
     } else {
-      this.routeChange('login')
+      await this.props.addToCart(this.props.userId, item)
     }
+
+    this.routeChange()
   }
 
-  routeChange(route) {
+  routeChange() {
     // redirect to list of items after completed
-    let path = `/${route}`
+    let path = `/cart`
     this.props.history.push(path)
   }
 
@@ -52,8 +69,8 @@ class ProductsContainer extends Component {
                 key={product.id}
                 product={product}
                 isLoggedIn={this.props.isLoggedIn}
-                // onAddToCartClicked
                 onClick={this.handleClick}
+                props={this.props}
               />
             ))}
           </div>
@@ -66,12 +83,16 @@ class ProductsContainer extends Component {
 const mapStateToProps = state => ({
   productList: state.products.productList,
   isLoggedIn: !!state.user.id,
-  userId: state.user.id
-  // isAdmin : state.user.adimin
+  userId: state.user.id,
+  selectedProducts: state.selectedProducts,
+  userCart: state.cart.userCart
 })
 const mapDispatchToProps = dispatch => ({
   fetchProducts: () => dispatch(getCurrentProduct()),
-  addToCart: (userId, item) => dispatch(addItemToServer(userId, item))
+  addToCart: (userId, item) => dispatch(addItemToServer(userId, item)),
+  getProductByCategory: category => dispatch(getProductByCategory(category)),
+  getCartFromServer: userId => dispatch(getCartFromServer(userId)),
+  updateItem: (userId, item) => dispatch(updateItemToServer(userId, item))
 
   // add a prop which can add the product into the cart
 })
